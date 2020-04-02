@@ -6,10 +6,18 @@ template <typename T>
 class CircularBuffer
 {
 public:
+	class Iterator;
+
 	CircularBuffer(size_t capacity);
 	~CircularBuffer();
 
 	size_t size() const;
+
+	Iterator begin();
+	Iterator end();
+
+	const Iterator begin() const;
+	const Iterator end() const;
 
 	void push_back(const T& val);
 	void push_top(const T& val);
@@ -18,6 +26,121 @@ public:
 	void pop_top();
 
 	T& operator[](size_t i) const;
+
+	class Iterator
+	{
+	public:
+		Iterator(T* cursor, size_t position, T* data, size_t& capacity, size_t& start, size_t& end) : _cursor(cursor), _position(position), _data(data), _capacity(capacity), _start(start), _end(end) {}
+
+		Iterator& operator++(int)
+		{
+			if (_position + 1 == _capacity && _start > _end)
+			{
+				_position = 0;
+				_cursor = &_data[0];
+			}
+			else
+			{
+				_cursor = &_data[++_position];
+			}
+
+			return *this;
+		}
+
+		Iterator& operator--(int)
+		{
+			if ((signed)_position - 1 < 0 && _start > _end)
+			{
+				_position = _capacity - 1;
+				_cursor = &_data[_position];
+			}
+			else if ((signed)_position - 1 < 0)
+				return *this;
+			else
+			{
+				_cursor = &_data[--_position];
+			}
+
+			return *this;
+		}
+
+		Iterator& operator++()
+		{
+			if (_position + 1 == _capacity && _start > _end)
+			{
+				_position = 0;
+				_cursor = &_data[0];
+			}
+			else
+			{
+				_cursor = &_data[++_position];
+			}
+
+			return *this;
+		}
+
+		Iterator& operator--()
+		{
+			if ((signed)_position - 1 < 0 && _start > _end)
+			{
+				_position = _capacity - 1;
+				_cursor = &_data[_position];
+			}
+			else if ((signed)_position - 1 < 0)
+				return *this;
+			else
+			{
+				_cursor = &_data[--_position];
+			}
+
+			return *this;
+		}
+
+		Iterator& operator-(int i)
+		{
+			if ((signed)_position - i < 0 && _start > _end)
+			{
+				if ((signed)_capacity - abs((signed)_position - i) < _start)
+					return *this;
+				else
+				{
+					_position = _capacity - abs(_position - i);
+					_cursor = &_data[_position];
+				}
+			}
+			else if (_start < _end && _position - i < _start)
+				return *this;
+			else
+			{
+				_position -= i;
+				_cursor = &_data[_position];
+			}
+
+			return *this;
+		}
+
+		bool operator!=(const Iterator& it) const
+		{
+			return it._position != _position;
+		}
+
+		bool operator==(const Iterator& it) const
+		{
+			return it._position == _position;
+		}
+
+		T& operator*()
+		{
+			return *_cursor;
+		}
+	private:
+		T* _cursor;
+		T* _data;
+		size_t _capacity;
+		size_t _position;
+		size_t _start;
+		size_t _end;
+	};
 private:
 	size_t _capacity;
 	size_t _start;
@@ -27,9 +150,10 @@ private:
 };
 
 template <typename T>
-CircularBuffer<T>::CircularBuffer(size_t capacity) : _capacity(capacity)
+CircularBuffer<T>::CircularBuffer(size_t capacity)
 {
 	_arrayElement = new T[capacity];
+	_capacity = capacity;
 	_count = 0;
 	_start = 0;
 	_end = 0;
@@ -116,4 +240,28 @@ template <typename T>
 size_t CircularBuffer<T>::size() const
 {
 	return _count;
+}
+
+template <typename T>
+typename CircularBuffer<T>::Iterator CircularBuffer<T>::begin()
+{
+	return Iterator(&_arrayElement[_start % _capacity], _start % _capacity, _arrayElement, _capacity, _start, _end);
+}
+
+template <typename T>
+typename CircularBuffer<T>::Iterator CircularBuffer<T>::end()
+{
+	return Iterator(&_arrayElement[_end % _capacity], _end % _capacity, _arrayElement, _capacity, _start, _end);
+}
+
+template <typename T>
+typename const CircularBuffer<T>::Iterator CircularBuffer<T>::begin() const
+{
+	return Iterator(&_arrayElement[_start % _capacity], _start % _capacity, _arrayElement, _capacity, _start, _end);
+}
+
+template <typename T>
+typename const CircularBuffer<T>::Iterator CircularBuffer<T>::end() const
+{
+	return Iterator(&_arrayElement[_end % _capacity], _end % _capacity, _arrayElement, _capacity, _start, _end);
 }
