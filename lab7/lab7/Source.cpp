@@ -6,6 +6,8 @@
 
 int main()
 {
+	std::vector<int> c;
+
 	CircularBuffer<int> check(10);
 	
 	check.push_back(10);
@@ -21,8 +23,9 @@ int main()
 	check.push_back(2128);
 	check.push_back(28);
 	check.push_top(-228);
-
-	auto it = std::min_element(check.begin(), check.end());
+	
+	//std::sort(check.begin(), check.end());
+	auto it = std::max_element(check.begin(), check.end());
 
 	std::cout << *it << std::endl;
 
