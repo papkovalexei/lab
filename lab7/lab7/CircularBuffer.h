@@ -7,8 +7,9 @@ template <typename _Ty>
 class _CircularBuffer_iterator : public std::iterator<std::random_access_iterator_tag, _Ty>
 {
 public:
-	_CircularBuffer_iterator() {}
+	using difference_type = typename std::iterator<std::random_access_iterator_tag, _Ty>::difference_type;
 
+	_CircularBuffer_iterator() {}
 	_CircularBuffer_iterator(_Ty* buffer, size_t& capacity, int& start, int& end, int position) : _data(buffer), _capacity(capacity), _start(start), _end(end), _position(position){}
 
 	bool operator!=(_CircularBuffer_iterator const& _other_iterator) const
@@ -19,39 +20,104 @@ public:
 	{
 		return this->_position % _capacity == _other_iterator._position % _capacity;
 	}
-
-	_CircularBuffer_iterator operator-(const int& _pos) const
-	{
-		_CircularBuffer_iterator iterator = *this;
-
-		iterator._position -= _pos;
-
-		return iterator;
+	bool operator>(const _CircularBuffer_iterator& rhs) const 
+	{ 
+		if (_start > _end)
+		{
+			if (_position < _capacity && rhs._position < _capacity)
+				return _position > rhs._position;
+			else if (_position < _capacity)
+				return false;
+			else if (rhs._position < _capacity)
+				return true;
+			else
+				return _position > rhs._position;
+		}
+		else
+			return _position > rhs._position;
 	}
-	_CircularBuffer_iterator operator-(const _CircularBuffer_iterator& it) const
+	bool operator<(const _CircularBuffer_iterator& rhs) const 
+	{
+		if (_start > _end)
+		{
+			if (_position < _capacity && rhs._position < _capacity)
+				return _position < rhs._position;
+			else if (_position < _capacity)
+				return true;
+			else if (rhs._position < _capacity)
+				return false;
+			else
+				return _position < rhs._position;
+		}
+		else
+			return _position < rhs._position;
+	}
+	bool operator>=(const _CircularBuffer_iterator& rhs) const
+	{ 
+		if (_start > _end)
+		{
+			if (_position < _capacity && rhs._position < _capacity)
+				return _position >= rhs._position;
+			else if (_position < _capacity)
+				return false;
+			else if (rhs._position < _capacity)
+				return true;
+			else
+				return _position >= rhs._position;
+		}
+		else
+			return _position >= rhs._position;
+	}
+	bool operator<=(const _CircularBuffer_iterator& rhs) const 
+	{
+		if (_start > _end)
+		{
+			if (_position < _capacity && rhs._position < _capacity)
+				return _position <= rhs._position;
+			else if (_position < _capacity)
+				return true;
+			else if (rhs._position < _capacity)
+				return false;
+			else
+				return _position <= rhs._position;
+		}
+		else
+			return _position <= rhs._position;
+	}
+	
+	difference_type operator-(const _CircularBuffer_iterator& it) const
 	{
 		_CircularBuffer_iterator iterator = *this;
 
 		iterator._position -= it._position;
 
-		return iterator;
+		return *iterator;
 	}
-
-	_CircularBuffer_iterator operator+(const int& _pos) const
-	{
-		_CircularBuffer_iterator iterator = *this;
-
-		iterator._position += _pos;
-
-		return iterator;
-	}
-	_Ty operator+(const _CircularBuffer_iterator& it) const
+	difference_type operator+(const _CircularBuffer_iterator& it) const
 	{
 		_CircularBuffer_iterator iterator = *this;
 
 		iterator._position += it._position;
 
 		return *iterator;
+	}
+
+	_CircularBuffer_iterator operator+(const int& _pos) const
+	{
+		_CircularBuffer_iterator iterator = *this;
+
+		iterator._position = (_position + _pos) % _capacity;
+
+		return iterator;
+	}
+
+	_CircularBuffer_iterator operator-(const int& _pos) const
+	{
+		_CircularBuffer_iterator iterator = *this;
+
+		iterator._position = (_position + _capacity - _pos) % _capacity;
+
+		return iterator;
 	}
 
 	_CircularBuffer_iterator operator++()
@@ -120,7 +186,6 @@ private:
 	size_t _capacity;
 	int _start;
 	int _end;
-	int _count;
 	_Ty* _arrayElement;
 };
 
@@ -129,7 +194,6 @@ CircularBuffer<T>::CircularBuffer(size_t capacity)
 {
 	_arrayElement = new T[capacity + 1];
 	_capacity = capacity + 1;
-	_count = 0;
 	_start = 0;
 	_end = 0;
 }
@@ -179,14 +243,6 @@ void CircularBuffer<T>::pop_top()
 	else
 		throw std::exception("Buffer is empty");
 }
-
-template <typename T>
-size_t CircularBuffer<T>::size() const
-{
-	return _count;
-}
-
-//_CircularBuffer_iterator(_Ty* buffer, size_t& capacity, size_t& start, size_t& end) : _data(buffer), _capacity(capacity), _start(start), _end(end) {}
 
 template <typename _Ty>
 typename _CircularBuffer_iterator<_Ty> CircularBuffer<_Ty>::begin()
