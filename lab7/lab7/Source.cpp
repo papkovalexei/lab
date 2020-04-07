@@ -25,26 +25,9 @@ int main()
 	check.push_top(-228);
 
 	//std::sort(check.begin(), check.end());
-	auto it = std::max_element(check.begin(), check.end());
-	auto it1 = std::min_element(check.begin(), check.end());
-
-	auto f = (it1 - it);
-	std::cout << *f << std::endl;
-	std::cout << *it << std::endl;
-
-	std::cout << "_________________" << std::endl;
-
-	std::reverse(check.begin(), check.end());
-
-	for (auto it = check.begin(); it != check.end(); it++)
-	{
-		std::cout << *it << std::endl;
-	}
-	std::cout << "_________________" << std::endl;
-	std::reverse(check.begin(), check.end());
-	for (int i = 0; i < 10; i++)
-		std::cout << check[i] << std::endl;
-
-
+	
+	for (int i = 0; i < 7; i++)
+		std::cout << check[i] << " ";
+	std::cout << std::endl;
 	return 0;
 }

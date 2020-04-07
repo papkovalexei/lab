@@ -143,26 +143,17 @@ CircularBuffer<T>::~CircularBuffer()
 template <typename _Ty>
 void CircularBuffer<_Ty>::push_back(const _Ty& val)
 {
-	if (_count != _capacity)
-		_count++;
-
-	if (_end + 1 == _capacity)
-		_end = 0;
+	if (_start % _capacity - _end % _capacity == 1)
+		_start++;
 	_arrayElement[_end++ % _capacity] = val;
-
 }
 
 template <typename _Ty>
 void CircularBuffer<_Ty>::push_top(const _Ty& val)
 {
-	if (_count != _capacity)
-		_count++;
-
-	if ((signed)_start - 1 < 0)
-		_start = _capacity - 1;
-	else
-		_start--;
+	_start = (_start + _capacity - 1) % _capacity;
 	_arrayElement[_start % _capacity] = val;
+
 }
 
 template <typename _Ty>
@@ -174,20 +165,8 @@ _Ty& CircularBuffer<_Ty>::operator[](size_t i) const
 template <typename T>
 void CircularBuffer<T>::pop_back()
 {
-	if (_count > 0)
-	{
-		if ((signed)_end - 1 < 0)
-		{
-			_arrayElement[_capacity - 1] = T();
-			_end = _capacity - 1;
-		}
-		else
-		{
-			_arrayElement[(_end - 1) % _capacity] = T();
-			_end--;
-		}
-		_count--;
-	}
+	if (_start % _capacity != _end % _capacity)
+		_end = _end + _capacity - 1;
 	else
 		throw std::exception("Buffer is empty");
 }
@@ -195,11 +174,8 @@ void CircularBuffer<T>::pop_back()
 template <typename T>
 void CircularBuffer<T>::pop_top()
 {
-	if (_count > 0)
-	{
-		_arrayElement[_start++ % _capacity] = T();
-		_count--;
-	}
+	if (_start % _capacity != _end % _capacity)
+		_start++;
 	else
 		throw std::exception("Buffer is empty");
 }
