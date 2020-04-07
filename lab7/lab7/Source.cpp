@@ -23,11 +23,22 @@ int main()
 	check.push_back(2128);
 	check.push_back(28);
 	check.push_top(-228);
-
+	check.push_back(322);
+	check.push_back(323);
+	check.push_back(324);
 	//std::sort(check.begin(), check.end());
-	
-	for (int i = 0; i < 7; i++)
+	for (int i = 0; i < 10; i++)
 		std::cout << check[i] << " ";
 	std::cout << std::endl;
+	check.push_back(328);
+	check.push_back(329);
+	check.push_back(3210);
+	for (int i = 0; i < 10; i++)
+		std::cout << check[i] << " ";
+	std::cout << std::endl;
+	/*for (auto it = check.begin(); it != check.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;*/
+
 	return 0;
 }

@@ -127,8 +127,8 @@ private:
 template <typename T>
 CircularBuffer<T>::CircularBuffer(size_t capacity)
 {
-	_arrayElement = new T[capacity];
-	_capacity = capacity;
+	_arrayElement = new T[capacity + 1];
+	_capacity = capacity + 1;
 	_count = 0;
 	_start = 0;
 	_end = 0;
@@ -144,8 +144,9 @@ template <typename _Ty>
 void CircularBuffer<_Ty>::push_back(const _Ty& val)
 {
 	if (_start % _capacity - _end % _capacity == 1)
-		_start++;
-	_arrayElement[_end++ % _capacity] = val;
+		_start = (_start + 1) % _capacity;
+	_arrayElement[_end % _capacity] = val;
+	_end = (_end + 1) % _capacity;
 }
 
 template <typename _Ty>
@@ -153,7 +154,6 @@ void CircularBuffer<_Ty>::push_top(const _Ty& val)
 {
 	_start = (_start + _capacity - 1) % _capacity;
 	_arrayElement[_start % _capacity] = val;
-
 }
 
 template <typename _Ty>
@@ -166,7 +166,7 @@ template <typename T>
 void CircularBuffer<T>::pop_back()
 {
 	if (_start % _capacity != _end % _capacity)
-		_end = _end + _capacity - 1;
+		_end = (_end + _capacity - 1) % _capacity;
 	else
 		throw std::exception("Buffer is empty");
 }
@@ -175,7 +175,7 @@ template <typename T>
 void CircularBuffer<T>::pop_top()
 {
 	if (_start % _capacity != _end % _capacity)
-		_start++;
+		_start = (_start + 1) % _capacity;
 	else
 		throw std::exception("Buffer is empty");
 }
