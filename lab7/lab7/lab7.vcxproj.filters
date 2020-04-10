@@ -27,4 +27,12 @@
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="CircularBuffer.tpp">
+      <Filter>Исходные файлы</Filter>
+    </None>
+    <None Include="_CircularBuffer_iterator.tpp">
+      <Filter>Исходные файлы</Filter>
+    </None>
+  </ItemGroup>
 </Project>

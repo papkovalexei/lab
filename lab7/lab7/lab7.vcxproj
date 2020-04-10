@@ -131,6 +131,10 @@
     <ClInclude Include="CircularBuffer.h" />
     <ClInclude Include="_CircularBuffer_iterator.h" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="CircularBuffer.tpp" />
+    <None Include="_CircularBuffer_iterator.tpp" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
