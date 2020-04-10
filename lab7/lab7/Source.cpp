@@ -33,9 +33,32 @@ int main()
 	for (int i = 0; i < 10; i++)
 		std::cout << check[i] << " ";
 	std::cout << std::endl;
-	check.push_back(328);
-	check.push_back(329);
-	check.push_back(3210);
+	
+	check.resize(4);
+
+	for (int i = 0; i < check.size(); i++)
+		std::cout << check[i] << " ";
+	std::cout << std::endl;
+
+	/*std::vector<int> array;
+
+	array.push_back(1);
+	array.push_back(2);
+	array.push_back(3);
+	array.push_back(4);
+	array.push_back(5);
+	array.push_back(6);
+	array.push_back(7);
+
+	for (auto it = array.begin(); it != array.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;
+
+	array.resize(4);
+
+	for (auto it = array.begin(); it != array.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl;*/
 
 	return 0;
 }
