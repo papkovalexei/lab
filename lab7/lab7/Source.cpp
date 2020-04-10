@@ -26,20 +26,59 @@ int main()
 	check.push_back(324);
 	for (int i = 0; i < 10; i++)
 		std::cout << check[i] << " ";
-	std::cout << std::endl;
+	std::cout << std::endl << "___________________" << std::endl;
 	std::sort(check.begin(), check.end());
+	std::cout << "Sort" << std::endl;
 	for (int i = 0; i < 10; i++)
 		std::cout << check[i] << " ";
-	std::cout << std::endl;
+	std::cout << std::endl << "___________________" << std::endl;
 	
-//	check.resize(4);
+	//check.resize(15);
 
-	auto it = check.erase(find(check.begin(), check.end(), 322));
-	std::cout << *it << std::endl;
+	check.erase(find(check.begin(), check.end(), 9));
+	std::cout << "Delete 9" << std::endl;
+	check.erase(find(check.begin(), check.end(), 2128));
+	std::cout << "Delete 2128" << std::endl;
 
 	for (int i = 0; i < check.size(); i++)
 		std::cout << check[i] << " ";
-	std::cout << std::endl;
+	std::cout << std::endl << "___________________" << std::endl;
+
+	std::cout << "Insert 1111 before 10" << std::endl;
+	check.insert(find(check.begin(), check.end(), 10), 1111);
+
+	for (int i = 0; i < check.size(); i++)
+		std::cout << check[i] << " ";
+	std::cout << std::endl << "___________________" << std::endl;
+
+	std::cout << "Set capacity = 5" << std::endl;
+	check.resize(5);
+
+	for (int i = 0; i < check.size(); i++)
+		std::cout << check[i] << " ";
+	std::cout << std::endl << "___________________" << std::endl;
+
+	std::cout << "Push top 2222" << std::endl;
+	check.push_top(2222);
+	for (int i = 0; i < check.size(); i++)
+		std::cout << check[i] << " ";
+	std::cout << std::endl << "___________________" << std::endl;
+
+	std::cout << "Set capacity = 7" << std::endl;
+		check.resize(7);
+	std::cout << "Push top 3333" << std::endl;
+	std::cout << "Push back 4444" << std::endl;
+	check.push_top(3333);
+	check.push_back(4444);
+	
+	for (int i = 0; i < check.size(); i++)
+		std::cout << check[i] << " ";
+	std::cout << std::endl << "___________________" << std::endl;
+
+	std::cout << "Iterator: ";
+	for (auto it = check.begin() + 1; it != check.end(); it++)
+		std::cout << *it << " ";
+	std::cout << std::endl << "___________________" << std::endl;
 
 	return 0;
 }

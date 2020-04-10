@@ -225,8 +225,10 @@ void CircularBuffer<_Ty>::push_back(const _Ty& val)
 template <typename _Ty>
 void CircularBuffer<_Ty>::push_top(const _Ty& val)
 {
-	if (_end % _capacity - _start % _capacity == 1)
+	if (_end % _capacity - _start % _capacity == 1 || (_end == _capacity - 1 && _start == 0))
+	{
 		_end = (_end + _capacity - 1) % _capacity;
+	}
 	else
 		_count++;
 	_start = (_start + _capacity - 1) % _capacity;
@@ -282,28 +284,30 @@ size_t CircularBuffer<_Ty>::size() const
 template <typename _Ty>
 void CircularBuffer<_Ty>::resize(const size_t& capacity)
 {
-	_Ty* buffer = new _Ty[capacity + 1];
-	size_t max_size = 0;
+	_Ty* buffer = new _Ty[_capacity];
+	int max_size = 0;
 
-	for (size_t i = 0; i < _count, i < capacity; i++)
+	for (int i = 0; i < capacity; i++)
 	{
+		if (i == _count)
+			break;
+
 		buffer[i] = operator[](i);
 		max_size++;
 	}
 
 	delete[] _arrayElement;
-
 	_arrayElement = new _Ty[capacity + 1];
 
-	for (size_t i = 0; i < max_size; i++)
+	for (int i = 0; i < max_size; i++)
 		_arrayElement[i] = buffer[i];
 
-	_start = 0;
 	_count = max_size;
-	_end = max_size;
-	_capacity = capacity;
+	_capacity = capacity + 1;
+	_start = 0;
+	_end = _count;
 
-	delete buffer;
+	delete[] buffer;
 }
 
 template <typename _Ty>
@@ -326,24 +330,25 @@ typename _CircularBuffer_iterator<_Ty> CircularBuffer<_Ty>::insert(const _Circul
 		int position_in_buffer = -1;
 
 		int i = 0;
-		for (auto it = begin(); it != end(), i < _capacity; it++, i++)
+		for (auto it = begin(); it != end(), i <= _count; it++, i++)
 		{
 			if (it == iterator)
 			{
 				position_in_buffer = i;
 				buffer[i] = value;
+				max_size++;
 				i++;
 			}
 
 			buffer[i] = *it;
-			max_size = i;
+			max_size++;
 		}
 
 		delete[] _arrayElement;
 
 		_arrayElement = new _Ty[_capacity];
 
-		for (int i = 0; i < max_size; i++)
+		for (int i = 0; i <= max_size; i++)
 			_arrayElement[i] = buffer[i];
 
 		_start = 0;
@@ -364,7 +369,7 @@ typename _CircularBuffer_iterator<_Ty> CircularBuffer<_Ty>::erase(const _Circula
 		pop_top();
 		return begin();
 	}
-	else if (iterator == end())
+	else if (iterator == end() - 1)
 	{
 		pop_back();
 		return end() - 1;
@@ -376,7 +381,7 @@ typename _CircularBuffer_iterator<_Ty> CircularBuffer<_Ty>::erase(const _Circula
 		int position_in_buffer = -1;
 
 		int i = 0;
-		for (auto it = begin(); it != end(), i < _capacity; it++, i++)
+		for (auto it = begin(); it != end(); it++, i++)
 		{
 			if (it == iterator)
 			{
@@ -392,12 +397,12 @@ typename _CircularBuffer_iterator<_Ty> CircularBuffer<_Ty>::erase(const _Circula
 
 		_arrayElement = new _Ty[_capacity];
 
-		for (int i = 0; i < max_size; i++)
+		for (int i = 0; i <= max_size; i++)
 			_arrayElement[i] = buffer[i];
 
 		_start = 0;
-		_end = max_size - 1;
-		_count = max_size - 1;
+		_end = max_size + 1;
+		_count = max_size + 1;
 
 		delete[] buffer;
 
