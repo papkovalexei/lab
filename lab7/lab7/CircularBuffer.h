@@ -174,16 +174,19 @@ public:
 	_CircularBuffer_iterator<_Ty> begin();
 	_CircularBuffer_iterator<_Ty> end();
 
+	_CircularBuffer_iterator<_Ty> insert(const _CircularBuffer_iterator<_Ty>& iterator, const _Ty& value);
+	_CircularBuffer_iterator<_Ty> erase(const _CircularBuffer_iterator<_Ty>& iterator);
+
 	void push_back(const _Ty& val);
 	void push_top(const _Ty& val);
 
 	void pop_back();
 	void pop_top();
 
-	void resize(size_t capacity);
+	void resize(const size_t& capacity);
 	size_t size() const;
 
-	_Ty& operator[](size_t i) const;
+	_Ty& operator[](const size_t& i) const;
 private:
 	size_t _capacity;
 	size_t _count;
@@ -231,7 +234,7 @@ void CircularBuffer<_Ty>::push_top(const _Ty& val)
 }
 
 template <typename _Ty>
-_Ty& CircularBuffer<_Ty>::operator[](size_t i) const
+_Ty& CircularBuffer<_Ty>::operator[](const size_t& i) const
 {
 	return _arrayElement[(_start + i) % _capacity];
 }
@@ -277,7 +280,7 @@ size_t CircularBuffer<_Ty>::size() const
 }
 
 template <typename _Ty>
-void CircularBuffer<_Ty>::resize(size_t capacity)
+void CircularBuffer<_Ty>::resize(const size_t& capacity)
 {
 	_Ty* buffer = new _Ty[capacity + 1];
 	size_t max_size = 0;
@@ -301,4 +304,103 @@ void CircularBuffer<_Ty>::resize(size_t capacity)
 	_capacity = capacity;
 
 	delete buffer;
+}
+
+template <typename _Ty>
+typename _CircularBuffer_iterator<_Ty> CircularBuffer<_Ty>::insert(const _CircularBuffer_iterator<_Ty>& iterator, const _Ty& value)
+{
+	if (iterator == begin())
+	{
+		push_top(value);
+		return begin();
+	}
+	else if (iterator == end())
+	{
+		push_back(value);
+		return end() - 1;
+	}
+	else
+	{
+		_Ty* buffer = new _Ty[_capacity];
+		int max_size = 0;
+		int position_in_buffer = -1;
+
+		int i = 0;
+		for (auto it = begin(); it != end(), i < _capacity; it++, i++)
+		{
+			if (it == iterator)
+			{
+				position_in_buffer = i;
+				buffer[i] = value;
+				i++;
+			}
+
+			buffer[i] = *it;
+			max_size = i;
+		}
+
+		delete[] _arrayElement;
+
+		_arrayElement = new _Ty[_capacity];
+
+		for (int i = 0; i < max_size; i++)
+			_arrayElement[i] = buffer[i];
+
+		_start = 0;
+		_end = max_size;
+		_count = max_size;
+
+		delete[] buffer;
+
+		return begin() + position_in_buffer;
+	}
+}
+
+template <typename _Ty>
+typename _CircularBuffer_iterator<_Ty> CircularBuffer<_Ty>::erase(const _CircularBuffer_iterator<_Ty>& iterator)
+{
+	if (iterator == begin())
+	{
+		pop_top();
+		return begin();
+	}
+	else if (iterator == end())
+	{
+		pop_back();
+		return end() - 1;
+	}
+	else
+	{
+		_Ty* buffer = new _Ty[_capacity];
+		int max_size = 0;
+		int position_in_buffer = -1;
+
+		int i = 0;
+		for (auto it = begin(); it != end(), i < _capacity; it++, i++)
+		{
+			if (it == iterator)
+			{
+				position_in_buffer = i;
+				it++;
+			}
+
+			buffer[i] = *it;
+			max_size = i;
+		}
+
+		delete[] _arrayElement;
+
+		_arrayElement = new _Ty[_capacity];
+
+		for (int i = 0; i < max_size; i++)
+			_arrayElement[i] = buffer[i];
+
+		_start = 0;
+		_end = max_size - 1;
+		_count = max_size - 1;
+
+		delete[] buffer;
+
+		return begin() + position_in_buffer;
+	}
 }
