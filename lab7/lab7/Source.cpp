@@ -32,8 +32,6 @@ int main()
 	for (int i = 0; i < 10; i++)
 		std::cout << check[i] << " ";
 	std::cout << std::endl << "___________________" << std::endl;
-	
-	//check.resize(15);
 
 	check.erase(find(check.begin(), check.end(), 9));
 	std::cout << "Delete 9" << std::endl;
