@@ -1,14 +1,19 @@
 #include <time.h>
 #include <stdlib.h>
+#include <iostream>
 
 #include "RubikCube.h"
+#include "Machine.h"
+
 
 #define SIZE 100
-#define TIME 5
+#define TIME 10
 
 const int width = 600;
 const int height = 600;
 const int depth = 300;
+
+int _step = 0;
 
 float xrot = 0;
 float yrot = 0;
@@ -18,6 +23,7 @@ float ydiff = 0;
 bool mouseDown = false;
 
 int timerOn = 0;
+int automat = 0;
 
 unsigned int color_brik[9] = { 0xFFFFFF, 0xFFFF00, 0x0000FF, 0x00FF00, 0xFF38CA, 0xFF6F00 };
 
@@ -60,6 +66,16 @@ void keyboard(unsigned char key, int, int)
 		cube.rotation(key - '0', 3);
 		display();
 	}
+	else if (key == 'c')
+	{
+		for (int i = 0; i < 6; i++)
+			std::cout << cube._details[2][1][0].getColorFragment()[i] << std::endl;
+		std::cout << "_____________\n";
+	}
+	else if (key == 'r')
+	{
+		automat = 1 - automat;
+	}
 }
 
 void timer(int = 0)
@@ -77,6 +93,35 @@ void timer(int = 0)
 		if (cube.getBrinkAnimation() != -1)
 			cube.rotation(cube.getBrinkAnimation(), 3);
 	}
+
+	if (automat)
+	{
+		if (cube.emptyQueue())
+		{
+			Machine machine(cube, _step);
+
+			std::cout << _step << std::endl;
+
+			std::vector<int> rotate = machine.getAction();
+
+			if (rotate.size() == 0)
+			{
+				//std::cout << "Ste++\n";
+				_step++;
+			}
+
+			for (int i = 0; i < rotate.size(); i++)
+			{
+				//std::cout << rotate[i] << std::endl;
+				cube.pushMove(rotate[i]);
+			}
+
+			cube.rotation();
+		}
+		else if (cube.getBrinkAnimation() == -1)
+			cube.rotation();
+	}
+
 	display();
 }
 
@@ -105,6 +150,7 @@ void mouse(int button, int state, int x, int y)
 
 	if (button == GLUT_RIGHT_BUTTON && state == GLUT_DOWN)
 		timerOn = 1 - timerOn;
+		
 }
 
 void initCube(int argc, char** argv)

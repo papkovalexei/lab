@@ -1,4 +1,6 @@
 #pragma once
+#include <queue>
+
 #include "FragmentCube.h"
 
 class RubikCube
@@ -8,8 +10,14 @@ public:
 
 	void draw();
 	void rotation(int brink, float angle);
+	void rotation();
+
+	void pushMove(int brink);
 
 	int getBrinkAnimation();
+	bool emptyQueue();
+
+	FragmentCube _details[3][3][3];
 private:
 	void rotationData(int brink, int vec);
 
@@ -17,8 +25,8 @@ private:
 	unsigned int _color[6];
 	float _brink_rotate[6];
 	short _brink_animation;
+	std::queue<int> _queueMove;
 
-	FragmentCube _details[3][3][3];
 	FragmentCube tmp[4][4];
 };
 

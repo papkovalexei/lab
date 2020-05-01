@@ -140,12 +140,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Machine.cpp" />
     <ClCompile Include="RubikCube.cpp" />
     <ClCompile Include="FragmentCube.cpp" />
     <ClCompile Include="initGraphics.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Machine.h" />
     <ClInclude Include="RubikCube.h" />
     <ClInclude Include="FragmentCube.h" />
     <ClInclude Include="initGraphics.h" />

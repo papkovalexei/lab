@@ -10,6 +10,8 @@ public:
 
 	void draw(float x, float y, float z);
 
+	int* getColorFragment();
+
 	void setColor(int i, int color);
 	void setSize(float size);
 

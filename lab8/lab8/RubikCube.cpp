@@ -2,6 +2,37 @@
 
 #include "RubikCube.h"
 
+/*
+center:
+	[0][1][1] - pink
+	[1][0][1] - blue
+	[1][1][0] - yellow
+	[2][1][1] - orange
+	[1][2][1] - green
+	[1][1][2] - white
+2 color brik:
+*/
+
+/*
+	[0][1][2] - white/pink
+	[1][2][2] - white/green
+	[1][0][2] - white/blue
+	[2][1][2] - white/orange
+	[2][1][0] - orange/yellow
+	[2][0][1] - orange/blue
+	[2][2][1] - orange/green
+	[1][0][0] - yellow/blue
+	[0][1][0] - yellow/pink
+	[1][2][0] - yellow/green
+	[0][2][1] - pink/green
+	[0][0][1] - pink/blue
+	*/
+
+void RubikCube::pushMove(int brink)
+{
+	_queueMove.push(brink);
+}
+
 RubikCube::RubikCube(float size, unsigned int* color) : _size(size)
 {
 	_brink_animation = -1;
@@ -103,6 +134,7 @@ void RubikCube::rotation(int brink, float angle)
 				rotationData(brink, 1);
 			else
 				rotationData(brink, -1);
+
 			_brink_rotate[brink] = 0;
 			_brink_animation = -1;
 		}
@@ -171,4 +203,20 @@ void RubikCube::draw()
 			for (int k = 0; k < 3; k++)
 				if (check_status[i][j][k])
 					_details[i][j][k].draw(_size / 3 * i, _size / 3 * j, _size / 3 * k);
+}
+
+void RubikCube::rotation()
+{
+	if (!_queueMove.empty())
+	{
+		int brink = _queueMove.front();
+		_queueMove.pop();
+
+		rotation(brink, 3);
+	}
+}
+
+bool RubikCube::emptyQueue()
+{
+	return _queueMove.empty();
 }

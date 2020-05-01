@@ -2,6 +2,11 @@
 
 FragmentCube::FragmentCube(float size) : _size(size) {}
 
+int* FragmentCube::getColorFragment()
+{
+	return _color;
+}
+
 unsigned char* FragmentCube::getColor(int i)
 {
 	_color_byte[0] = _color[i] >> 16;
