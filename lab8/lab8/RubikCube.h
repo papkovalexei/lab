@@ -18,8 +18,9 @@ public:
 	bool emptyQueue();
 
 	FragmentCube _details[3][3][3];
-private:
+
 	void rotationData(int brink, int vec);
+private:
 
 	float _size;
 	unsigned int _color[6];

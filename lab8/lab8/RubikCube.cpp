@@ -14,6 +14,10 @@ center:
 */
 
 /*
+
+*/
+
+/*
 	[0][1][2] - white/pink
 	[1][2][2] - white/green
 	[1][0][2] - white/blue
@@ -130,10 +134,13 @@ void RubikCube::rotation(int brink, float angle)
 		}
 		else
 		{
-			if ((_brink_rotate[brink] < 0) ^ (_brink_animation == 2 || brink == 3))
+			if ((_brink_rotate[brink] < 0) ^ (_brink_animation == 2 || _brink_animation == 3))
 				rotationData(brink, 1);
 			else
+			{
 				rotationData(brink, -1);
+				std::cout << "-1-1-1-1-1-\n";
+			}
 
 			_brink_rotate[brink] = 0;
 			_brink_animation = -1;

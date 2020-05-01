@@ -7,7 +7,7 @@
 
 
 #define SIZE 100
-#define TIME 10
+#define TIME 4
 
 const int width = 600;
 const int height = 600;
@@ -74,6 +74,7 @@ void keyboard(unsigned char key, int, int)
 	}
 	else if (key == 'r')
 	{
+		_step = 0;
 		automat = 1 - automat;
 	}
 }
@@ -104,18 +105,20 @@ void timer(int = 0)
 
 			std::vector<int> rotate = machine.getAction();
 
-			if (rotate.size() == 0)
+			if (rotate.size() > 0)
 			{
-				//std::cout << "Ste++\n";
-				_step++;
-			}
+				if (rotate[0] == -1)
+					_step++;
+				else
+				{
 
-			for (int i = 0; i < rotate.size(); i++)
-			{
-				//std::cout << rotate[i] << std::endl;
-				cube.pushMove(rotate[i]);
+					for (auto it = rotate.begin(); it != rotate.end(); it++)
+					{
+						//std::cout << rotate[i] << std::endl;
+						cube.pushMove(*it);
+					}
+				}
 			}
-
 			cube.rotation();
 		}
 		else if (cube.getBrinkAnimation() == -1)
