@@ -7,7 +7,7 @@
 
 
 #define SIZE 100
-#define TIME 4
+int TIME = 4;
 
 const int width = 600;
 const int height = 600;
@@ -75,14 +75,12 @@ void keyboard(unsigned char key, int, int)
 	else if (key == 'r')
 	{
 		_step = 0;
-
 		Machine machine(cube, 0);
 
 		std::vector<int> rotate = machine.getAction();
 
 		for (int i = 0; i < rotate.size(); i++)
 			cube.pushMove(rotate[i]);
-
 		automat = 1 - automat;
 	}
 }
