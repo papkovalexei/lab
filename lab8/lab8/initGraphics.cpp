@@ -75,6 +75,14 @@ void keyboard(unsigned char key, int, int)
 	else if (key == 'r')
 	{
 		_step = 0;
+
+		Machine machine(cube, 0);
+
+		std::vector<int> rotate = machine.getAction();
+
+		for (int i = 0; i < rotate.size(); i++)
+			cube.pushMove(rotate[i]);
+
 		automat = 1 - automat;
 	}
 }
@@ -97,32 +105,10 @@ void timer(int = 0)
 
 	if (automat)
 	{
-		if (cube.emptyQueue())
+		if (cube.emptyQueue() || cube.getBrinkAnimation() == -1)
 		{
-			Machine machine(cube, _step);
-
-			std::cout << _step << std::endl;
-
-			std::vector<int> rotate = machine.getAction();
-
-			if (rotate.size() > 0)
-			{
-				if (rotate[0] == -1)
-					_step++;
-				else
-				{
-
-					for (auto it = rotate.begin(); it != rotate.end(); it++)
-					{
-						//std::cout << rotate[i] << std::endl;
-						cube.pushMove(*it);
-					}
-				}
-			}
 			cube.rotation();
 		}
-		else if (cube.getBrinkAnimation() == -1)
-			cube.rotation();
 	}
 
 	display();

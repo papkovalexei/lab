@@ -1,6 +1,6 @@
 #include "Machine.h"
 
-Machine::Machine(RubikCube& cube, int step) : _cube(cube)
+Machine::Machine(RubikCube cube, int step) : _cube(cube)
 {
 	_whichAction = 0;
 	_step = step;
@@ -55,10 +55,8 @@ bool getArgument(int* color, int first, int second, int third)
 	return true;
 }
 
-std::vector<int> getPinkYellow(RubikCube cube1)
+void getPinkYellow(RubikCube& cube1, std::vector<int>& answer)
 {
-	std::vector<int> answer;
-
 	if (getArgument(cube1._details[0][1][2].getColorFragment(), 0xFFFF00, 0xFF38CA))
 	{
 		answer.push_back(4);
@@ -160,11 +158,126 @@ std::vector<int> getPinkYellow(RubikCube cube1)
 		answer.push_back(3);
 		answer.push_back(0);
 	}
+}
 
-	return answer;
+void getGreenYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
+{
+	std::vector<int> answer;
+
+	if (getArgument(cube1._details[0][1][2].getColorFragment(), 0xFFFF00, 0x00FF00))
+	{
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(3);
+		answer.push_back(3);
+	}
+	else if (getArgument(cube1._details[1][2][2].getColorFragment(), 0xFFFF00, 0x00FF00))
+	{
+		answer.push_back(3);
+		answer.push_back(3);
+	}
+	else if (getArgument(cube1._details[1][0][2].getColorFragment(), 0xFFFF00, 0x00FF00))
+	{
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(3);
+		answer.push_back(3);
+	}
+	else if (getArgument(cube1._details[2][1][2].getColorFragment(), 0xFFFF00, 0x00FF00))
+	{
+		answer.push_back(1);
+		answer.push_back(3);
+		answer.push_back(3);
+	}
+	else if (getArgument(cube1._details[2][1][0].getColorFragment(), 0xFFFF00, 0x00FF00))
+	{
+		answer.push_back(5);
+		answer.push_back(3);
+	}
+	else if (getArgument(cube1._details[2][0][1].getColorFragment(), 0xFFFF00, 0x00FF00))
+	{
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(3);
+	}
+	else if (getArgument(cube1._details[2][2][1].getColorFragment(), 0xFFFF00, 0x00FF00))
+	{
+		answer.push_back(3);
+	}
+	else if (getArgument(cube1._details[1][0][0].getColorFragment(), 0xFFFF00, 0x00FF00))
+	{
+		answer.push_back(2);
+		answer.push_back(2);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(3);
+		answer.push_back(3);
+	}
+	else if (getArgument(cube1._details[1][2][0].getColorFragment(), 0xFFFF00, 0x00FF00))
+	{
+		// FURU
+		if (cube1._details[1][2][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[1][2][0].getColorFragment()[3] != 0x00FF00)
+		{
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(0);
+			answer.push_back(0);
+			answer.push_back(0);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(0);
+		}
+	}
+	else if (getArgument(cube1._details[0][2][1].getColorFragment(), 0xFFFF00, 0x00FF00))
+	{
+		answer.push_back(3);
+		answer.push_back(3);
+		answer.push_back(3);
+	}
+	else if (getArgument(cube1._details[0][0][1].getColorFragment(), 0xFFFF00, 0x00FF00))
+	{
+		answer.push_back(2);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(3);
+		answer.push_back(3);
+	}
+
+	for (int i = 0; i < answer.size(); i++)
+	{
+		if (answer[i] == 2 || answer[i] == 3)
+			cube1.rotationData(answer[i], 1);
+		else
+			cube1.rotationData(answer[i], -1);
+		returnAnswer.push_back(answer[i]);
+	}
+
+	if (cube1._details[1][2][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[1][2][0].getColorFragment()[3] != 0x00FF00)
+	{
+		answer.push_back(3);
+		answer.push_back(3);
+		answer.push_back(3);
+		answer.push_back(0);
+		answer.push_back(0);
+		answer.push_back(0);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(0);
+		for (int i = 0; i < answer.size(); i++)
+			returnAnswer.push_back(answer[i]);
+	}
 }
 
 std::vector<int> Machine::getAction()
 {
-	return getPinkYellow(_cube);
+	std::vector<int> answer;
+
+	getPinkYellow(_cube, answer);
+	getGreenYellow(_cube, answer);
+
+	return answer;
 }

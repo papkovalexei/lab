@@ -137,10 +137,7 @@ void RubikCube::rotation(int brink, float angle)
 			if ((_brink_rotate[brink] < 0) ^ (_brink_animation == 2 || _brink_animation == 3))
 				rotationData(brink, 1);
 			else
-			{
 				rotationData(brink, -1);
-				std::cout << "-1-1-1-1-1-\n";
-			}
 
 			_brink_rotate[brink] = 0;
 			_brink_animation = -1;

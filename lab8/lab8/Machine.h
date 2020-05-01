@@ -15,7 +15,7 @@
 class Machine
 {
 public:
-	Machine(RubikCube& cube, int step);
+	Machine(RubikCube cube, int step);
 	int _step;
 	std::vector<int> getAction();
 private:
