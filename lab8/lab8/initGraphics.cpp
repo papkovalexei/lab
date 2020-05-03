@@ -72,7 +72,7 @@ void keyboard(unsigned char key, int, int)
 	else if (key == 'r')
 	{
 		_step = 0;
-		Machine machine(cube, 0);
+		Machine machine(cube);
 
 		std::vector<int> rotate = machine.getAction();
 
@@ -84,7 +84,7 @@ void keyboard(unsigned char key, int, int)
 	{
 		for (int i = 0; i < 6; i++)
 		{
-			std::cout << cube._details[0][1][2].getColorFragment()[i] << std::endl;
+			std::cout << cube._details[2][2][0].getColorFragment()[i] << std::endl;
 		}
 	}
 }
