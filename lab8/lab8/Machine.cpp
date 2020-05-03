@@ -57,18 +57,18 @@ bool getArgument(int* color, int first, int second, int third)
 
 void getPinkYellow(RubikCube& cube1, std::vector<int>& answer)
 {
-	if (getArgument(cube1._details[0][1][2].getColorFragment(), 0xFFFF00, 0xFF38CA))
+	if (getArgument(cube1.getColorDetails(0, 1, 2), YELLOW, PINK))
 	{
 		answer.push_back(4);
 		answer.push_back(4);
 	}
-	else if (getArgument(cube1._details[1][2][2].getColorFragment(), 0xFFFF00, 0xFF38CA))
+	else if (getArgument(cube1.getColorDetails(1, 2, 2), YELLOW, PINK))
 	{
 		answer.push_back(1);
 		answer.push_back(4);
 		answer.push_back(4);
 	}
-	else if (getArgument(cube1._details[1][0][2].getColorFragment(), 0xFFFF00, 0xFF38CA))
+	else if (getArgument(cube1.getColorDetails(1, 0, 2), YELLOW, PINK))
 	{
 		answer.push_back(1);
 		answer.push_back(1);
@@ -76,25 +76,25 @@ void getPinkYellow(RubikCube& cube1, std::vector<int>& answer)
 		answer.push_back(4);
 		answer.push_back(4);
 	}
-	else if (getArgument(cube1._details[2][1][2].getColorFragment(), 0xFFFF00, 0xFF38CA))
+	else if (getArgument(cube1.getColorDetails(2, 1, 2), YELLOW, PINK))
 	{
 		answer.push_back(5);
 		answer.push_back(5);
 		answer.push_back(0);
 		answer.push_back(0);
 	}
-	else if (getArgument(cube1._details[2][1][0].getColorFragment(), 0xFFFF00, 0xFF38CA))
+	else if (getArgument(cube1.getColorDetails(2, 1, 0), YELLOW, PINK))
 	{
 		answer.push_back(0);
 		answer.push_back(0);
 	}
-	else if (getArgument(cube1._details[2][0][1].getColorFragment(), 0xFFFF00, 0xFF38CA))
+	else if (getArgument(cube1.getColorDetails(2, 0, 1), YELLOW, PINK))
 	{
 		answer.push_back(5);
 		answer.push_back(0);
 		answer.push_back(0);
 	}
-	else if (getArgument(cube1._details[2][2][1].getColorFragment(), 0xFFFF00, 0xFF38CA))
+	else if (getArgument(cube1.getColorDetails(2, 2, 1), YELLOW, PINK))
 	{
 		answer.push_back(5);
 		answer.push_back(5);
@@ -102,15 +102,16 @@ void getPinkYellow(RubikCube& cube1, std::vector<int>& answer)
 		answer.push_back(0);
 		answer.push_back(0);
 	}
-	else if (getArgument(cube1._details[1][0][0].getColorFragment(), 0xFFFF00, 0xFF38CA))
+	else if (getArgument(cube1.getColorDetails(1, 0, 0), YELLOW, PINK))
 	{
 		answer.push_back(0);
 		answer.push_back(0);
 		answer.push_back(0);
 	}
-	else if (getArgument(cube1._details[0][1][0].getColorFragment(), 0xFFFF00, 0xFF38CA))
+	else if (getArgument(cube1.getColorDetails(0, 1, 0), YELLOW, PINK))
 	{
-		if (cube1._details[0][1][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[0][1][0].getColorFragment()[4] != 0xFF38CA)
+		if (cube1.getColorDetails(0, 1, 0)[1] != YELLOW 
+			&& cube1.getColorDetails(0, 1, 0)[4] != PINK)
 		{
 			//FURU
 			answer.push_back(4);
@@ -122,18 +123,18 @@ void getPinkYellow(RubikCube& cube1, std::vector<int>& answer)
 			answer.push_back(3);
 			answer.push_back(0);
 		}
-	}
-	else if (getArgument(cube1._details[1][2][0].getColorFragment(), 0xFFFF00, 0xFF38CA))
+	}	
+	else if (getArgument(cube1.getColorDetails(1, 2, 0), YELLOW, PINK))
 	{
 		answer.push_back(0);
-	}
-	else if (getArgument(cube1._details[0][2][1].getColorFragment(), 0xFFFF00, 0xFF38CA))
+	}	
+	else if (getArgument(cube1.getColorDetails(0, 2, 1), YELLOW, PINK))
 	{
 		answer.push_back(4);
 		answer.push_back(4);
 		answer.push_back(4);
 	}
-	else if (getArgument(cube1._details[0][0][1].getColorFragment(), 0xFFFF00, 0xFF38CA))
+	else if (getArgument(cube1.getColorDetails(0, 0, 1), YELLOW, PINK))
 	{
 		answer.push_back(4);
 	}
@@ -148,7 +149,8 @@ void getPinkYellow(RubikCube& cube1, std::vector<int>& answer)
 	
 	std::vector<int> buffer;
 
-	if (cube1._details[0][1][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[0][1][0].getColorFragment()[4] != 0xFF38CA)
+	if (cube1.getColorDetails(0, 1, 0)[1] != YELLOW 
+		&& cube1.getColorDetails(0, 1, 0)[4] != PINK)
 	{
 		//FURU
 		buffer.push_back(4);
@@ -159,15 +161,6 @@ void getPinkYellow(RubikCube& cube1, std::vector<int>& answer)
 		buffer.push_back(3);
 		buffer.push_back(3);
 		buffer.push_back(0);
-
-		answer.push_back(4);
-		answer.push_back(0);
-		answer.push_back(0);
-		answer.push_back(0);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(0);
 	}
 
 	for (int i = 0; i < buffer.size(); i++)
@@ -176,6 +169,7 @@ void getPinkYellow(RubikCube& cube1, std::vector<int>& answer)
 			cube1.rotationData(buffer[i], 1);
 		else
 			cube1.rotationData(buffer[i], -1);
+		answer.push_back(buffer[i]);
 	}
 }
 
@@ -183,7 +177,7 @@ void getGreenYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 {
 	std::vector<int> answer;
 
-	if (getArgument(cube1._details[0][1][2].getColorFragment(), 0xFFFF00, 0x00FF00))
+	if (getArgument(cube1.getColorDetails(0, 1, 2), YELLOW, GREEN))
 	{
 		answer.push_back(1);
 		answer.push_back(1);
@@ -191,40 +185,40 @@ void getGreenYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 		answer.push_back(3);
 		answer.push_back(3);
 	}
-	else if (getArgument(cube1._details[1][2][2].getColorFragment(), 0xFFFF00, 0x00FF00))
+	else if (getArgument(cube1.getColorDetails(1, 2, 2), YELLOW, GREEN))
 	{
 		answer.push_back(3);
 		answer.push_back(3);
 	}
-	else if (getArgument(cube1._details[1][0][2].getColorFragment(), 0xFFFF00, 0x00FF00))
+	else if (getArgument(cube1.getColorDetails(1, 0, 2), YELLOW, GREEN))
 	{
 		answer.push_back(1);
 		answer.push_back(1);
 		answer.push_back(3);
 		answer.push_back(3);
 	}
-	else if (getArgument(cube1._details[2][1][2].getColorFragment(), 0xFFFF00, 0x00FF00))
+	else if (getArgument(cube1.getColorDetails(2, 1, 2), YELLOW, GREEN))
 	{
 		answer.push_back(1);
 		answer.push_back(3);
 		answer.push_back(3);
 	}
-	else if (getArgument(cube1._details[2][1][0].getColorFragment(), 0xFFFF00, 0x00FF00))
+	else if (getArgument(cube1.getColorDetails(2, 1, 0), 0xFFFF00, GREEN))
 	{
 		answer.push_back(5);
 		answer.push_back(3);
 	}
-	else if (getArgument(cube1._details[2][0][1].getColorFragment(), 0xFFFF00, 0x00FF00))
+	else if (getArgument(cube1.getColorDetails(2, 0, 1), YELLOW, GREEN))
 	{
 		answer.push_back(5);
 		answer.push_back(5);
 		answer.push_back(3);
 	}
-	else if (getArgument(cube1._details[2][2][1].getColorFragment(), 0xFFFF00, 0x00FF00))
+	else if (getArgument(cube1.getColorDetails(2, 2, 1), YELLOW, GREEN))
 	{
 		answer.push_back(3);
 	}
-	else if (getArgument(cube1._details[1][0][0].getColorFragment(), 0xFFFF00, 0x00FF00))
+	else if (getArgument(cube1.getColorDetails(1, 0, 0), YELLOW, GREEN))
 	{
 		answer.push_back(2);
 		answer.push_back(2);
@@ -233,10 +227,11 @@ void getGreenYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 		answer.push_back(3);
 		answer.push_back(3);
 	}
-	else if (getArgument(cube1._details[1][2][0].getColorFragment(), 0xFFFF00, 0x00FF00))
+	else if (getArgument(cube1.getColorDetails(1, 2, 0), YELLOW, GREEN))
 	{
 		// FURU
-		if (cube1._details[1][2][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[1][2][0].getColorFragment()[3] != 0x00FF00)
+		if (cube1.getColorDetails(1, 2, 0)[1] != YELLOW
+			&& cube1.getColorDetails(1, 2, 0)[3] != GREEN)
 		{
 			answer.push_back(3);
 			answer.push_back(3);
@@ -250,13 +245,13 @@ void getGreenYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 			answer.push_back(0);
 		}
 	}
-	else if (getArgument(cube1._details[0][2][1].getColorFragment(), 0xFFFF00, 0x00FF00))
+	else if (getArgument(cube1.getColorDetails(0, 2, 1), YELLOW, GREEN))
 	{
 		answer.push_back(3);
 		answer.push_back(3);
 		answer.push_back(3);
 	}
-	else if (getArgument(cube1._details[0][0][1].getColorFragment(), 0xFFFF00, 0x00FF00))
+	else if (getArgument(cube1.getColorDetails(0, 0, 1), YELLOW, GREEN))
 	{
 		answer.push_back(2);
 		answer.push_back(1);
@@ -274,29 +269,29 @@ void getGreenYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 		returnAnswer.push_back(answer[i]);
 	}
 
-	std::vector<int> buffer;
+	answer.clear();	
 
-	if (cube1._details[1][2][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[1][2][0].getColorFragment()[3] != 0x00FF00)
+	if (cube1.getColorDetails(1, 2, 0)[1] != YELLOW 
+		&& cube1.getColorDetails(1, 2, 0)[3] != GREEN)
 	{
-		buffer.push_back(3);
-		buffer.push_back(3);
-		buffer.push_back(3);
-		buffer.push_back(0);
-		buffer.push_back(0);
-		buffer.push_back(0);
-		buffer.push_back(5);
-		buffer.push_back(5);
-		buffer.push_back(5);
-		buffer.push_back(0);
+		answer.push_back(3);
+		answer.push_back(3);
+		answer.push_back(3);
+		answer.push_back(0);
+		answer.push_back(0);
+		answer.push_back(0);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(0);
 
-		for (int i = 0; i < buffer.size(); i++)
+		for (int i = 0; i < answer.size(); i++)
 		{
-			returnAnswer.push_back(buffer[i]);
-
-			if (buffer[i] == 2 || buffer[i] == 3)
-				cube1.rotationData(buffer[i], 1);
+			if (answer[i] == 2 || answer[i] == 3)
+				cube1.rotationData(answer[i], 1);
 			else
-				cube1.rotationData(buffer[i], -1);
+				cube1.rotationData(answer[i], -1);
+			returnAnswer.push_back(answer[i]);
 		}
 	}
 }
@@ -304,15 +299,15 @@ void getGreenYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 void getOrangeYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 {
 	std::vector<int> answer;
-
-	if (getArgument(cube1._details[0][1][2].getColorFragment(), 0xFFFF00, 0xFF6F00))
+	
+	if (getArgument(cube1.getColorDetails(0, 1, 2), YELLOW, ORANGE))
 	{
 		answer.push_back(1);
 		answer.push_back(1);
 		answer.push_back(5);
 		answer.push_back(5);
 	}
-	else if (getArgument(cube1._details[1][2][2].getColorFragment(), 0xFFFF00, 0xFF6F00))
+	else if (getArgument(cube1.getColorDetails(1, 2, 2), YELLOW, ORANGE))
 	{
 		answer.push_back(1);
 		answer.push_back(1);
@@ -320,20 +315,21 @@ void getOrangeYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 		answer.push_back(5);
 		answer.push_back(5);
 	}
-	else if (getArgument(cube1._details[1][0][2].getColorFragment(), 0xFFFF00, 0xFF6F00))
+	else if (getArgument(cube1.getColorDetails(1, 0, 2), YELLOW, ORANGE))
 	{
 		answer.push_back(1);
 		answer.push_back(5);
 		answer.push_back(5);
 	}
-	else if (getArgument(cube1._details[2][1][2].getColorFragment(), 0xFFFF00, 0xFF6F00))
+	else if (getArgument(cube1.getColorDetails(2, 1, 2), YELLOW, ORANGE))
 	{
 		answer.push_back(5);
 		answer.push_back(5);
 	}
-	else if (getArgument(cube1._details[2][1][0].getColorFragment(), 0xFFFF00, 0xFF6F00))
+	else if (getArgument(cube1.getColorDetails(2, 1, 0), YELLOW, ORANGE))
 	{
-		if (cube1._details[2][1][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[2][1][0].getColorFragment()[5] != 0xFF6F00)
+		if (cube1.getColorDetails(2, 1, 0)[1] != YELLOW
+			&& cube1.getColorDetails(2, 1, 0)[5] != ORANGE)
 		{
 			answer.push_back(5);
 			answer.push_back(5);
@@ -345,24 +341,24 @@ void getOrangeYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 			answer.push_back(0);
 		}
 	}
-	else if (getArgument(cube1._details[2][0][1].getColorFragment(), 0xFFFF00, 0xFF6F00))
+	else if (getArgument(cube1.getColorDetails(2, 0, 1), YELLOW, ORANGE))
 	{
 		answer.push_back(5);
 	}
-	else if (getArgument(cube1._details[2][2][1].getColorFragment(), 0xFFFF00, 0xFF6F00))
+	else if (getArgument(cube1.getColorDetails(2, 2, 1), YELLOW, ORANGE))
 	{
 		answer.push_back(5);
 		answer.push_back(5);
 		answer.push_back(5);
 	}
-	else if (getArgument(cube1._details[1][0][0].getColorFragment(), 0xFFFF00, 0xFF6F00))
+	else if (getArgument(cube1.getColorDetails(1, 0, 0), YELLOW, ORANGE))
 	{
 		answer.push_back(2);
 		answer.push_back(2);
 		answer.push_back(2);
 		answer.push_back(5);
 	}
-	else if (getArgument(cube1._details[0][2][1].getColorFragment(), 0xFFFF00, 0xFF6F00))
+	else if (getArgument(cube1.getColorDetails(0, 2, 1), YELLOW, ORANGE))
 	{
 		answer.push_back(4);
 		answer.push_back(1);
@@ -373,7 +369,7 @@ void getOrangeYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 		answer.push_back(5);
 		answer.push_back(5);
 	}
-	else if (getArgument(cube1._details[0][0][1].getColorFragment(), 0xFFFF00, 0xFF6F00))
+	else if (getArgument(cube1.getColorDetails(0, 0, 1), YELLOW, ORANGE))
 	{
 		answer.push_back(2);
 		answer.push_back(2);
@@ -391,7 +387,8 @@ void getOrangeYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 
 	std::vector<int> buffer;
 
-	if (cube1._details[2][1][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[2][1][0].getColorFragment()[5] != 0xFF6F00)
+	if (cube1.getColorDetails(2, 1, 0)[1] != YELLOW
+		&& cube1.getColorDetails(2, 1, 0)[5] != ORANGE)
 	{
 		buffer.push_back(5);
 		buffer.push_back(5);
@@ -418,25 +415,25 @@ void getBlueYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 {
 	std::vector<int> answer;
 
-	if (getArgument(cube1._details[0][1][2].getColorFragment(), 0xFFFF00, 0x0000FF))
+	if (getArgument(cube1.getColorDetails(0, 1, 2), YELLOW, BLUE))
 	{
 		answer.push_back(1);
 		answer.push_back(2);
 		answer.push_back(2);
 	}
-	else if (getArgument(cube1._details[1][2][2].getColorFragment(), 0xFFFF00, 0x0000FF))
+	else if (getArgument(cube1.getColorDetails(1, 2, 2), YELLOW, BLUE))
 	{
 		answer.push_back(1);
 		answer.push_back(1);
 		answer.push_back(2);
 		answer.push_back(2);
 	}
-	else if (getArgument(cube1._details[1][0][2].getColorFragment(), 0xFFFF00, 0x0000FF))
+	else if (getArgument(cube1.getColorDetails(1, 0, 2), YELLOW, BLUE))
 	{
 		answer.push_back(2);
 		answer.push_back(2);
 	}
-	else if (getArgument(cube1._details[2][1][2].getColorFragment(), 0xFFFF00, 0x0000FF))
+	else if (getArgument(cube1.getColorDetails(2, 1, 2), YELLOW, BLUE))
 	{
 		answer.push_back(1);
 		answer.push_back(1);
@@ -444,11 +441,11 @@ void getBlueYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 		answer.push_back(2);
 		answer.push_back(2);
 	}
-	else if (getArgument(cube1._details[2][0][1].getColorFragment(), 0xFFFF00, 0x0000FF))
+	else if (getArgument(cube1.getColorDetails(2, 0, 1), YELLOW, BLUE))
 	{
 		answer.push_back(2);
 	}
-	else if (getArgument(cube1._details[2][2][1].getColorFragment(), 0xFFFF00, 0x0000FF))
+	else if (getArgument(cube1.getColorDetails(2, 2, 1), YELLOW, BLUE))
 	{
 		answer.push_back(5);
 		answer.push_back(1);
@@ -460,10 +457,11 @@ void getBlueYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 		answer.push_back(2);
 		answer.push_back(2);
 	}
-	else if (getArgument(cube1._details[1][0][0].getColorFragment(), 0xFFFF00, 0x0000FF))
+	else if (getArgument(cube1.getColorDetails(1, 0, 0), YELLOW, BLUE))
 	{
 		// FURU
-		if (cube1._details[1][0][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[1][0][0].getColorFragment()[2] != 0x0000FF)
+		if (cube1.getColorDetails(1, 0, 0)[1] != YELLOW 
+			&& cube1.getColorDetails(1, 0, 0)[2] != BLUE)
 		{
 			answer.push_back(2);
 			answer.push_back(0);
@@ -473,7 +471,7 @@ void getBlueYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 			answer.push_back(0);
 		}
 	}
-	else if (getArgument(cube1._details[0][2][1].getColorFragment(), 0xFFFF00, 0x0000FF))
+	else if (getArgument(cube1.getColorDetails(0, 2, 1), YELLOW, BLUE))
 	{
 		answer.push_back(4);
 		answer.push_back(1);
@@ -483,7 +481,7 @@ void getBlueYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 		answer.push_back(2);
 		answer.push_back(2);
 	}
-	else if (getArgument(cube1._details[0][0][1].getColorFragment(), 0xFFFF00, 0x0000FF))
+	else if (getArgument(cube1.getColorDetails(0, 0, 1), YELLOW, BLUE))
 	{
 		answer.push_back(2);
 		answer.push_back(2);
@@ -501,7 +499,8 @@ void getBlueYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 
 	std::vector<int> buffer;
 
-	if (cube1._details[1][0][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[1][0][0].getColorFragment()[2] != 0x0000FF)
+	if (cube1.getColorDetails(1, 0, 0)[1] != YELLOW 
+		&& cube1.getColorDetails(1, 0, 0)[2] != BLUE)
 	{
 		buffer.push_back(2);
 		buffer.push_back(0);
@@ -522,560 +521,15 @@ void getBlueYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
 	}
 }
 
-void getCornerGreenPinkYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
-{
-	std::vector<int> answer;
-
-	if (getArgument(cube1._details[0][0][2].getColorFragment(), 0xFFFF00, 0xFF38CA, 0x00FF00))
-	{
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[2][0][2].getColorFragment(), 0xFFFF00, 0xFF38CA, 0x00FF00))
-	{
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[0][2][2].getColorFragment(), 0xFFFF00, 0xFF38CA, 0x00FF00))
-	{
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[0][2][0].getColorFragment(), 0xFFFF00, 0xFF38CA, 0x00FF00))
-	{
-		if (cube1._details[0][2][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[0][2][0].getColorFragment()[4] != 0xFF38CA && cube1._details[0][2][0].getColorFragment()[3] != 0x00FF00)
-		{
-			answer.push_back(3);
-			answer.push_back(1);
-			answer.push_back(3);
-			answer.push_back(3);
-			answer.push_back(3);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(3);
-			answer.push_back(1);
-			answer.push_back(3);
-			answer.push_back(3);
-			answer.push_back(3);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(1);
-		}
-	}
-	else if (getArgument(cube1._details[0][0][0].getColorFragment(), 0xFFFF00, 0xFF38CA, 0x00FF00))
-	{
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[2][2][0].getColorFragment(), 0xFFFF00, 0xFF38CA, 0x00FF00))
-	{
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[2][0][0].getColorFragment(), 0xFFFF00, 0xFF38CA, 0x00FF00))
-	{
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(1);
-		answer.push_back(2);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-
-	for (int i = 0; i < answer.size(); i++)
-	{
-		if (answer[i] == 2 || answer[i] == 3)
-			cube1.rotationData(answer[i], 1);
-		else
-			cube1.rotationData(answer[i], -1);
-		returnAnswer.push_back(answer[i]);
-	}
-
-	while (cube1._details[0][2][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[0][2][0].getColorFragment()[4] != 0xFF38CA && cube1._details[0][2][0].getColorFragment()[3] != 0x00FF00)
-	{
-		std::cout << "not\n";
-
-		answer.clear();
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-
-		for (int i = 0; i < answer.size(); i++)
-		{
-			if (answer[i] == 2 || answer[i] == 3)
-				cube1.rotationData(answer[i], 1);
-			else
-				cube1.rotationData(answer[i], -1);
-			returnAnswer.push_back(answer[i]);
-		}
-	}
-
-	/*
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(3);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	*/
-}
-
-void getCornerGreenOrangeYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
-{
-	std::vector<int> answer;
-
-	if (getArgument(cube1._details[0][0][2].getColorFragment(), 0xFFFF00, 0xFF6F00, 0x00FF00))
-	{
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[2][0][2].getColorFragment(), 0xFFFF00, 0xFF6F00, 0x00FF00))
-	{
-		answer.push_back(1);
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[0][2][2].getColorFragment(), 0xFFFF00, 0xFF6F00, 0x00FF00))
-	{
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[0][0][0].getColorFragment(), 0xFFFF00, 0xFF6F00, 0x00FF00))
-	{
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[2][2][0].getColorFragment(), 0xFFFF00, 0xFF6F00, 0x00FF00))
-	{
-		// if
-		if (cube1._details[2][2][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[2][2][0].getColorFragment()[5] != 0xFF6F00 && cube1._details[2][2][0].getColorFragment()[3] != 0x00FF00)
-		{
-			answer.push_back(5);
-			answer.push_back(1);
-			answer.push_back(5);
-			answer.push_back(5);
-			answer.push_back(5);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(5);
-			answer.push_back(1);
-			answer.push_back(5);
-			answer.push_back(5);
-			answer.push_back(5);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(1);
-		}
-	}
-	else if (getArgument(cube1._details[2][0][0].getColorFragment(), 0xFFFF00, 0xFF6F00, 0x00FF00))
-	{
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(1);
-		answer.push_back(2);
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-
-	for (int i = 0; i < answer.size(); i++)
-	{
-		if (answer[i] == 2 || answer[i] == 3)
-			cube1.rotationData(answer[i], 1);
-		else
-			cube1.rotationData(answer[i], -1);
-		returnAnswer.push_back(answer[i]);
-	}
-
-	while (cube1._details[2][2][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[2][2][0].getColorFragment()[5] != 0xFF6F00 && cube1._details[2][2][0].getColorFragment()[3] != 0x00FF00)
-	{
-		std::cout << "not1\n";
-
-		answer.clear();
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(5);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-
-		for (int i = 0; i < answer.size(); i++)
-		{
-			if (answer[i] == 2 || answer[i] == 3)
-				cube1.rotationData(answer[i], 1);
-			else
-				cube1.rotationData(answer[i], -1);
-			returnAnswer.push_back(answer[i]);
-		}
-	}
-}
-
-void getCornerBluePinkYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
-{
-	std::vector<int> answer;
-
-	if (getArgument(cube1._details[0][0][2].getColorFragment(), 0xFFFF00, 0x0000FF, 0xFF38CA))
-	{
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[2][0][2].getColorFragment(), 0xFFFF00, 0x0000FF, 0xFF38CA))
-	{
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[0][2][2].getColorFragment(), 0xFFFF00, 0x0000FF, 0xFF38CA))
-	{
-		answer.push_back(1);
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[0][0][0].getColorFragment(), 0xFFFF00, 0x0000FF, 0xFF38CA))
-	{
-		if (cube1._details[0][0][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[0][0][0].getColorFragment()[4] != 0xFF38CA && cube1._details[0][0][0].getColorFragment()[2] != 0x0000FF)
-		{
-			answer.push_back(4);
-			answer.push_back(4);
-			answer.push_back(4);
-			answer.push_back(1);
-			answer.push_back(4);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(4);
-			answer.push_back(4);
-			answer.push_back(4);
-			answer.push_back(1);
-			answer.push_back(4);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(1);
-		}
-	}
-	else if (getArgument(cube1._details[2][0][0].getColorFragment(), 0xFFFF00, 0x0000FF, 0xFF38CA))
-	{
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(1);
-		answer.push_back(2);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-
-	/*answer.push_back(4);
-			answer.push_back(4);
-			answer.push_back(4);
-			answer.push_back(1);
-			answer.push_back(4);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(1);
-	*/
-	for (int i = 0; i < answer.size(); i++)
-	{
-		if (answer[i] == 2 || answer[i] == 3)
-			cube1.rotationData(answer[i], 1);
-		else
-			cube1.rotationData(answer[i], -1);
-		returnAnswer.push_back(answer[i]);
-	}
-
-	while (cube1._details[0][0][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[0][0][0].getColorFragment()[4] != 0xFF38CA && cube1._details[0][0][0].getColorFragment()[2] != 0x0000FF)
-	{
-		std::cout << "not2\n";
-
-		answer.clear();
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(4);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-
-		for (int i = 0; i < answer.size(); i++)
-		{
-			if (answer[i] == 2 || answer[i] == 3)
-				cube1.rotationData(answer[i], 1);
-			else
-				cube1.rotationData(answer[i], -1);
-			returnAnswer.push_back(answer[i]);
-		}
-	}
-}
-
-void getCornerBlueOrangeYellow(RubikCube& cube1, std::vector<int>& returnAnswer)
-{
-	std::vector<int> answer;
-
-	if (getArgument(cube1._details[0][0][2].getColorFragment(), 0xFFFF00, 0xFF6F00, 0x0000FF))
-	{
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[2][0][2].getColorFragment(), 0xFFFF00, 0xFF6F00, 0x0000FF))
-	{
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(1);
-		answer.push_back(2);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[0][2][2].getColorFragment(), 0xFFFF00, 0xFF6F00, 0x0000FF))
-	{
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(1);
-		answer.push_back(2);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-	}
-	else if (getArgument(cube1._details[2][0][0].getColorFragment(), 0xFFFF00, 0xFF6F00, 0x0000FF))
-	{
-		if (cube1._details[2][0][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[2][0][0].getColorFragment()[2] != 0x0000FF && cube1._details[2][0][0].getColorFragment()[5] != 0xFF6F00)
-		{
-			answer.push_back(2);
-			answer.push_back(2);
-			answer.push_back(2);
-			answer.push_back(1);
-			answer.push_back(2);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(2);
-			answer.push_back(2);
-			answer.push_back(2);
-			answer.push_back(1);
-			answer.push_back(2);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(1);
-		}
-	}
-
-	/*
-	answer.push_back(2);
-			answer.push_back(2);
-			answer.push_back(2);
-			answer.push_back(1);
-			answer.push_back(2);
-			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(1);
-	*/
-	for (int i = 0; i < answer.size(); i++)
-	{
-		if (answer[i] == 2 || answer[i] == 3)
-			cube1.rotationData(answer[i], 1);
-		else
-			cube1.rotationData(answer[i], -1);
-		returnAnswer.push_back(answer[i]);
-	}
-
-	while (cube1._details[2][0][0].getColorFragment()[1] != 0xFFFF00 && cube1._details[2][0][0].getColorFragment()[2] != 0x0000FF && cube1._details[2][0][0].getColorFragment()[5] != 0xFF6F00)
-	{
-		std::cout << "not228\n";
-
-		answer.clear();
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(1);
-		answer.push_back(2);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(2);
-		answer.push_back(1);
-		answer.push_back(2);
-		answer.push_back(1);
-		answer.push_back(1);
-		answer.push_back(1);
-
-		for (int i = 0; i < answer.size(); i++)
-		{
-			if (answer[i] == 2 || answer[i] == 3)
-				cube1.rotationData(answer[i], 1);
-			else
-				cube1.rotationData(answer[i], -1);
-			returnAnswer.push_back(answer[i]);
-		}
-	}
-}
-
 void getPinkGreenCenter(RubikCube& cube1, std::vector<int>& answer)
-{
+{	
+	if (getArgument(cube1._details[0][1][2].getColorFragment(), 0xFF38CA, 0x00FF00))
+	{
+		if (cube1._details[0][1][2].getColorFragment()[5] == 0xFF38CA && cube1._details[0][1][2].getColorFragment()[0] == 0x00FF00)
+		{
 
+		}
+	}
 }
 
 std::vector<int> Machine::getAction()
@@ -1086,10 +540,6 @@ std::vector<int> Machine::getAction()
 	getGreenYellow(_cube, answer);
 	getOrangeYellow(_cube, answer);
 	getBlueYellow(_cube, answer);
-	getCornerGreenPinkYellow(_cube, answer);
-	getCornerGreenOrangeYellow(_cube, answer);
-	getCornerBluePinkYellow(_cube, answer);
-	getCornerBlueOrangeYellow(_cube, answer);
 
 	std::cout << "Size: " << answer.size() << std::endl;
 

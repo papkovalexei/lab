@@ -1,0 +1,11 @@
+#pragma once
+
+enum Color
+{
+	WHITE = 0xFFFFFF,
+	YELLOW = 0xFFFF00,
+	BLUE = 0x0000FF,
+	GREEN = 0x00FF00,
+	PINK = 0xFF38CA,
+	ORANGE = 0xFF6F00
+};

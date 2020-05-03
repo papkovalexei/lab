@@ -147,6 +147,7 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Color.h" />
     <ClInclude Include="Machine.h" />
     <ClInclude Include="RubikCube.h" />
     <ClInclude Include="FragmentCube.h" />

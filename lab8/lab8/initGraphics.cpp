@@ -4,6 +4,7 @@
 
 #include "RubikCube.h"
 #include "Machine.h"
+#include "Color.h"
 
 
 #define SIZE 100
@@ -25,7 +26,7 @@ bool mouseDown = false;
 int timerOn = 0;
 int automat = 0;
 
-unsigned int color_brik[9] = { 0xFFFFFF, 0xFFFF00, 0x0000FF, 0x00FF00, 0xFF38CA, 0xFF6F00 };
+unsigned int color_brik[9] = { WHITE, YELLOW, BLUE, GREEN, PINK, ORANGE };
 
 RubikCube cube{ SIZE, color_brik };
 
@@ -43,7 +44,9 @@ void display()
 	glRotatef(yrot, 0.0f, 1.0f, 0.0f);
 
 	glColor3f(1, 0, 0);
+
 	glTranslatef(SIZE / -2.0, SIZE / -2.0, SIZE / -2.0);
+
 	cube.draw();
 	glPopMatrix();
 	glutSwapBuffers();
@@ -63,14 +66,8 @@ void keyboard(unsigned char key, int, int)
 {
 	if (cube.getBrinkAnimation() == -1 && key >= '0' && key <= '6')
 	{
-		cube.rotation(key - '0', 3);
+		cube.rotation(key - '0');
 		display();
-	}
-	else if (key == 'c')
-	{
-		for (int i = 0; i < 6; i++)
-			std::cout << cube._details[2][1][0].getColorFragment()[i] << std::endl;
-		std::cout << "_____________\n";
 	}
 	else if (key == 'r')
 	{
@@ -83,6 +80,13 @@ void keyboard(unsigned char key, int, int)
 			cube.pushMove(rotate[i]);
 		automat = 1 - automat;
 	}
+	else if (key == 'c')
+	{
+		for (int i = 0; i < 6; i++)
+		{
+			std::cout << cube._details[0][1][2].getColorFragment()[i] << std::endl;
+		}
+	}
 }
 
 void timer(int = 0)
@@ -93,20 +97,22 @@ void timer(int = 0)
 		if (cube.getBrinkAnimation() == -1)
 			keyboard(rand() % 6 + '0', 0, 0);
 		else
-			cube.rotation(cube.getBrinkAnimation(), 3);
+			cube.rotation(cube.getBrinkAnimation());
 	}
 	else
 	{
 		if (cube.getBrinkAnimation() != -1)
-			cube.rotation(cube.getBrinkAnimation(), 3);
+			cube.rotation(cube.getBrinkAnimation());
 	}
 
 	if (automat)
 	{
-		if (cube.emptyQueue() || cube.getBrinkAnimation() == -1)
+		if (cube.getBrinkAnimation() == -1)
 		{
 			cube.rotation();
 		}
+		else if (cube.emptyQueue())
+			automat = 1 - automat;
 	}
 
 	display();

@@ -3,6 +3,7 @@
 #include <vector>
 
 #include "RubikCube.h"
+#include "Color.h"
 
 #define CROSS_1 0
 #define CROSS_2 1

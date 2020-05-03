@@ -122,11 +122,11 @@ void RubikCube::rotationData(int brink, int vec)
 	}
 }
 
-void RubikCube::rotation(int brink, float angle)
+void RubikCube::rotation(int brink)
 {
 	if (_brink_animation == -1 || _brink_animation == brink)
 	{
-		_brink_rotate[brink] += angle;
+		_brink_rotate[brink] += _ANGLE_ROTATE;
 
 		if (static_cast<int>(_brink_rotate[brink]) % 90 != 0)
 		{
@@ -216,11 +216,16 @@ void RubikCube::rotation()
 		int brink = _queueMove.front();
 		_queueMove.pop();
 
-		rotation(brink, 3);
+		rotation(brink);
 	}
 }
 
 bool RubikCube::emptyQueue()
 {
 	return _queueMove.empty();
+}
+
+int* RubikCube::getColorDetails(int i, int j, int k)
+{
+	return _details[i][j][k].getColorFragment();
 }
