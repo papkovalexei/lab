@@ -28,7 +28,7 @@ private:
 	unsigned int _color[6];
 	float _brink_rotate[6];
 	short _brink_animation;
-	const int _ANGLE_ROTATE = 3;
+	const int _ANGLE_ROTATE = 15;
 	std::queue<int> _queueMove;
 
 	FragmentCube tmp[4][4];

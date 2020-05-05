@@ -1191,8 +1191,6 @@ void Machine::layer_2_step_1(std::vector<int>& returnAnswer)
 		if (_cube.getColorDetails(1, 0, 2)[0] == GREEN && _cube.getColorDetails(1, 0, 2)[2] == PINK)
 		{
 			answer.push_back(1);
-			answer.push_back(1);
-			answer.push_back(1);
 			//
 			answer.push_back(1);
 			answer.push_back(3);
@@ -1369,8 +1367,10 @@ void Machine::layer_2_step_1(std::vector<int>& returnAnswer)
 		returnAnswer.push_back(answer[i]);
 	}
 
-	if (_cube.getColorDetails(0, 2, 1)[3] != GREEN && _cube.getColorDetails(0, 2, 1)[4] != PINK)
+	if (_cube.getColorDetails(0, 2, 1)[3] != GREEN || _cube.getColorDetails(0, 2, 1)[4] != PINK)
+	{
 		layer_2_step_1(returnAnswer);
+	}
 }
 
 void Machine::layer_2_step_2(std::vector<int>& returnAnswer)
@@ -1629,8 +1629,10 @@ void Machine::layer_2_step_2(std::vector<int>& returnAnswer)
 		returnAnswer.push_back(answer[i]);
 	}
 
-	if (_cube.getColorDetails(2, 2, 1)[3] != GREEN && _cube.getColorDetails(2, 2, 1)[5] != ORANGE)
+	if (_cube.getColorDetails(2, 2, 1)[3] != GREEN || _cube.getColorDetails(2, 2, 1)[5] != ORANGE)
+	{
 		layer_2_step_2(returnAnswer);
+	}
 }
 
 void Machine::layer_2_step_3(std::vector<int>& returnAnswer)
@@ -1871,8 +1873,10 @@ void Machine::layer_2_step_3(std::vector<int>& returnAnswer)
 		returnAnswer.push_back(answer[i]);
 	}
 
-	if (_cube.getColorDetails(0, 0, 1)[2] != BLUE && _cube.getColorDetails(0, 0, 1)[4] != PINK)
+	if (_cube.getColorDetails(0, 0, 1)[2] != BLUE || _cube.getColorDetails(0, 0, 1)[4] != PINK)
+	{
 		layer_2_step_3(returnAnswer);
+	}
 }
 
 void Machine::layer_2_step_4(std::vector<int>& returnAnswer)
@@ -2093,8 +2097,372 @@ void Machine::layer_2_step_4(std::vector<int>& returnAnswer)
 		returnAnswer.push_back(answer[i]);
 	}
 
-	if (_cube.getColorDetails(2, 0, 1)[2] != BLUE && _cube.getColorDetails(2, 0, 1)[5] != ORANGE)
+	if (_cube.getColorDetails(2, 0, 1)[2] != BLUE || _cube.getColorDetails(2, 0, 1)[5] != ORANGE)
+	{		
 		layer_2_step_4(returnAnswer);
+	}
+}
+
+void Machine::cross_last_step_1(std::vector<int>& returnAnswer)
+{
+	std::vector<int> answer;
+
+	if (_cube.getColorDetails(0, 1, 2)[0] != WHITE
+		&& _cube.getColorDetails(1, 2, 2)[0] != WHITE
+		&& _cube.getColorDetails(1, 0, 2)[0] != WHITE
+		&& _cube.getColorDetails(2, 1, 2)[0] != WHITE)
+	{
+		answer.push_back(3);
+		answer.push_back(3);
+		answer.push_back(3);
+		answer.push_back(4);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(4);
+		answer.push_back(4);
+		answer.push_back(4);
+		answer.push_back(1);
+		answer.push_back(3);
+	}
+
+	for (int i = 0; i < answer.size(); i++)
+	{
+		if (answer[i] == 2 || answer[i] == 3)
+			_cube.rotationData(answer[i], 1);
+		else
+			_cube.rotationData(answer[i], -1);
+		returnAnswer.push_back(answer[i]);
+	}
+
+	answer.clear();
+
+	short count_white = 0;
+
+	if (_cube.getColorDetails(1, 0, 2)[0] == WHITE)
+		count_white++;
+	if (_cube.getColorDetails(0, 1, 2)[0] == WHITE)
+		count_white++;
+	if (_cube.getColorDetails(1, 2, 2)[0] == WHITE)
+		count_white++;
+	if (_cube.getColorDetails(2, 1, 2)[0] == WHITE)
+		count_white++;
+
+	if (count_white == 2)
+	{
+		bool angle;
+
+		if ((_cube.getColorDetails(1, 2, 2)[0] == WHITE
+			&& _cube.getColorDetails(1, 0, 2)[0] == WHITE) ||
+			(_cube.getColorDetails(0, 1, 2)[0] == WHITE
+				&& _cube.getColorDetails(2, 1, 2)[0] == WHITE))
+		{
+			angle = false;
+		}
+		else
+			angle = true;
+
+		if (angle)
+		{
+			if (_cube.getColorDetails(0, 1, 2)[0] == WHITE && _cube.getColorDetails(1, 2, 2)[0] == WHITE)
+			{
+				answer.push_back(1);
+				answer.push_back(1);
+			}
+			else if (_cube.getColorDetails(0, 1, 2)[0] == WHITE && _cube.getColorDetails(1, 0, 2)[0] == WHITE)
+			{
+				answer.push_back(1);
+			}
+			else if (_cube.getColorDetails(1, 2, 2)[0] == WHITE && _cube.getColorDetails(2, 1, 2)[0] == WHITE)
+			{
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+			}
+
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(3);
+		}
+
+		for (int i = 0; i < answer.size(); i++)
+		{
+			if (answer[i] == 2 || answer[i] == 3)
+				_cube.rotationData(answer[i], 1);
+			else
+				_cube.rotationData(answer[i], -1);
+			returnAnswer.push_back(answer[i]);
+		}
+
+		answer.clear();
+
+		if (_cube.getColorDetails(1, 2, 2)[0] == WHITE
+			&& _cube.getColorDetails(1, 0, 2)[0] == WHITE)
+			answer.push_back(1);
+
+		answer.push_back(3);
+		answer.push_back(3);
+		answer.push_back(3);
+		answer.push_back(4);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(4);
+		answer.push_back(4);
+		answer.push_back(4);
+		answer.push_back(1);
+		answer.push_back(3);
+
+		for (int i = 0; i < answer.size(); i++)
+		{
+			if (answer[i] == 2 || answer[i] == 3)
+				_cube.rotationData(answer[i], 1);
+			else
+				_cube.rotationData(answer[i], -1);
+			returnAnswer.push_back(answer[i]);
+		}
+	}
+}
+
+void Machine::cross_last_step_2(std::vector<int>& returnAnswer)
+{
+	std::vector<int> answer;
+
+	int color[4] = { _cube.getColorDetails(1, 2, 2)[3] , _cube.getColorDetails(2, 1, 2)[5], _cube.getColorDetails(1, 0, 2)[2], _cube.getColorDetails(0, 1, 2)[4] };
+
+	int i = 0, buffer = -1;
+	bool angle = false;
+	bool complete = false;
+	bool complete_cross = false;
+	int count = 0;
+	int now_color = color[i];
+	int next_color = color[i + 1];
+
+	while (i <= 4)
+	{
+		switch (now_color)
+		{
+		case PINK:
+			if (next_color == GREEN)
+			{
+				angle = true;
+				buffer = i;
+				i = 10;
+			}
+			break;
+		case GREEN:
+			if (next_color == ORANGE)
+			{
+				angle = true;
+				buffer = i;
+				i = 10;
+			}
+			break;
+		case ORANGE:
+			if (next_color == BLUE)
+			{
+				angle = true;
+				buffer = i;
+				i = 10;
+			}
+			break;
+		case BLUE:
+			if (next_color == PINK)
+			{
+				angle = true;
+				buffer = i;
+				i = 10;
+			}
+			break;
+		default:
+			break;
+		}
+		i++;
+		now_color = color[i % 4];
+		next_color = color[(i + 1) % 4];
+	}
+
+	int color_green = -1;
+
+	for (int buf = 0; buf < 4; buf++)
+	{
+		if (color[buf] == GREEN)
+		{
+			color_green = buf;
+			break;
+		}
+	}
+
+	if (color[(color_green + 1) % 4] == ORANGE
+		&& color[(color_green + 2) % 4] == BLUE
+		&& color[(color_green + 3) % 4] == PINK)
+		complete_cross = true;
+
+	if (!complete_cross)
+	{
+		if (angle)
+		{
+			complete = true;
+			switch (buffer)
+			{
+			case 0:
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				break;
+			case 1:
+				answer.push_back(1);
+				//
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				break;
+			case 2:
+				answer.push_back(1);
+				answer.push_back(1);
+				//
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				break;
+			case 3:
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				//
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				answer.push_back(5);
+				answer.push_back(1);
+				answer.push_back(1);
+				break;
+			default:
+				break;
+			}
+		}
+		else
+
+	{
+	answer.push_back(5);
+	answer.push_back(5);
+	answer.push_back(5);
+	answer.push_back(1);
+	answer.push_back(1);
+	answer.push_back(1);
+	answer.push_back(5);
+	answer.push_back(1);
+	answer.push_back(1);
+	answer.push_back(1);
+	answer.push_back(5);
+	answer.push_back(5);
+	answer.push_back(5);
+	answer.push_back(1);
+	answer.push_back(1);
+	answer.push_back(5);
+	answer.push_back(1);
+	answer.push_back(1);
+	answer.push_back(1);
+	}
+	}
+
+	for (int j = 0; j < answer.size(); j++)
+	{
+		if (answer[j] == 2 || answer[j] == 3)
+			_cube.rotationData(answer[j], 1);
+		else
+			_cube.rotationData(answer[j], -1);
+		returnAnswer.push_back(answer[j]);
+	}
+
+	while (_cube.getColorDetails(1, 2, 2)[3] != GREEN)
+	{
+		_cube.rotationData(1, -1);
+		returnAnswer.push_back(1);
+	}
+
+	if (complete_cross)
+	{
+		while (_cube.getColorDetails(1, 2, 2)[3] != GREEN)
+		{
+			_cube.rotationData(1, -1);
+			returnAnswer.push_back(1);
+		}
+	}
+	else if (!complete)
+		cross_last_step_2(returnAnswer);
 }
 
 std::vector<int> Machine::getAction()
@@ -2115,6 +2483,9 @@ std::vector<int> Machine::getAction()
 	layer_2_step_2(answer);
 	layer_2_step_3(answer);
 	layer_2_step_4(answer);
+
+	cross_last_step_1(answer);
+	cross_last_step_2(answer);
 
 	std::cout << "Size: " << answer.size() << std::endl;
 
