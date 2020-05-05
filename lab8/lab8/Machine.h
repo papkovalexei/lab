@@ -30,6 +30,11 @@ private:
 	void layer_1_step_3(std::vector<int>& answer);
 	void layer_1_step_4(std::vector<int>& answer);
 
+	void layer_2_step_1(std::vector<int>& answer);
+	void layer_2_step_2(std::vector<int>& answer);
+	void layer_2_step_3(std::vector<int>& answer);
+	void layer_2_step_4(std::vector<int>& answer);
+
 	RubikCube _cube;
 };
 

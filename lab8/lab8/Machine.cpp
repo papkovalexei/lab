@@ -1095,6 +1095,1008 @@ void Machine::layer_1_step_4(std::vector<int>& returnAnswer)
 	}
 }
 
+void Machine::layer_2_step_1(std::vector<int>& returnAnswer)
+{
+	std::vector<int> answer;
+
+	if (getArgument(_cube.getColorDetails(0, 1, 2), GREEN, PINK))
+	{
+		if (_cube.getColorDetails(0, 1, 2)[0] == GREEN && _cube.getColorDetails(0, 1, 2)[4] == PINK)
+		{
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+		}
+		else if (_cube.getColorDetails(0, 1, 2)[0] == PINK && _cube.getColorDetails(0, 1, 2)[4] == GREEN)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(1, 2, 2), GREEN, PINK))
+	{
+		if (_cube.getColorDetails(1, 2, 2)[0] == PINK && _cube.getColorDetails(1, 2, 2)[3] == GREEN)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+		}
+		else if (_cube.getColorDetails(1, 2, 2)[0] == GREEN && _cube.getColorDetails(1, 2, 2)[3] == PINK)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(1, 0, 2), GREEN, PINK))
+	{
+		if (_cube.getColorDetails(1, 0, 2)[0] == GREEN && _cube.getColorDetails(1, 0, 2)[2] == PINK)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+		}
+		else if (_cube.getColorDetails(1, 0, 2)[0] == PINK && _cube.getColorDetails(1, 0, 2)[2] == GREEN)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(2, 1, 2), GREEN, PINK))
+	{
+		if (_cube.getColorDetails(2, 1, 2)[0] == PINK && _cube.getColorDetails(2, 1, 2)[5] == GREEN)
+		{
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+		}
+		else if (_cube.getColorDetails(2, 1, 2)[0] == GREEN && _cube.getColorDetails(2, 1, 2)[5] == PINK)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(2, 0, 1), GREEN, PINK))
+	{
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(1);
+		answer.push_back(5);
+		answer.push_back(1);
+		answer.push_back(2);
+		answer.push_back(2);
+		answer.push_back(2);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(2);
+	}
+	else if (getArgument(_cube.getColorDetails(2, 2, 1), GREEN, PINK))
+	{
+		answer.push_back(1);
+		answer.push_back(5);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(3);
+		answer.push_back(3);
+		answer.push_back(3);
+		answer.push_back(1);
+		answer.push_back(3);
+	}
+	else if (getArgument(_cube.getColorDetails(0, 2, 1), GREEN, PINK))
+	{
+		if (_cube.getColorDetails(0, 2, 1)[3] != GREEN && _cube.getColorDetails(0, 2, 1)[4] != PINK)
+		{
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(0, 0, 1), GREEN, PINK))
+	{
+		answer.push_back(1);
+		answer.push_back(4);
+		answer.push_back(4);
+		answer.push_back(4);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(4);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(2);
+		answer.push_back(1);
+		answer.push_back(2);
+		answer.push_back(2);
+		answer.push_back(2);
+	}
+
+	for (int i = 0; i < answer.size(); i++)
+	{
+		if (answer[i] == 2 || answer[i] == 3)
+			_cube.rotationData(answer[i], 1);
+		else
+			_cube.rotationData(answer[i], -1);
+		returnAnswer.push_back(answer[i]);
+	}
+
+	if (_cube.getColorDetails(0, 2, 1)[3] != GREEN && _cube.getColorDetails(0, 2, 1)[4] != PINK)
+		layer_2_step_1(returnAnswer);
+}
+
+void Machine::layer_2_step_2(std::vector<int>& returnAnswer)
+{
+	std::vector<int> answer;
+
+	if (getArgument(_cube.getColorDetails(0, 1, 2), GREEN, ORANGE))
+	{
+		if (_cube.getColorDetails(0, 1, 2)[0] == ORANGE && _cube.getColorDetails(0, 1, 2)[4] == GREEN)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(3);
+		}
+		if (_cube.getColorDetails(0, 1, 2)[0] == GREEN && _cube.getColorDetails(0, 1, 2)[4] == ORANGE)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(1, 2, 2), GREEN, ORANGE))
+	{
+		if (_cube.getColorDetails(1, 2, 2)[0] == GREEN && _cube.getColorDetails(1, 2, 2)[3] == ORANGE)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+		}
+		else if (_cube.getColorDetails(1, 2, 2)[0] == ORANGE && _cube.getColorDetails(1, 2, 2)[3] == GREEN)
+		{
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(3);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(1, 0, 2), GREEN, ORANGE))
+	{
+		if (_cube.getColorDetails(1, 0, 2)[0] == GREEN && _cube.getColorDetails(1, 0, 2)[2] == ORANGE)
+		{
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+		}
+		else if (_cube.getColorDetails(1, 0, 2)[0] == ORANGE && _cube.getColorDetails(1, 0, 2)[2] == GREEN)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(3);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(2, 1, 2), GREEN, ORANGE))
+	{
+		if (_cube.getColorDetails(2, 1, 2)[0] == GREEN && _cube.getColorDetails(2, 1, 2)[5] == ORANGE)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+		}
+		else if (_cube.getColorDetails(2, 1, 2)[0] == ORANGE && _cube.getColorDetails(2, 1, 2)[5] == GREEN)
+		{
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(3);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(2, 0, 1), GREEN, ORANGE))
+	{
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(1);
+		answer.push_back(5);
+		answer.push_back(1);
+		answer.push_back(2);
+		answer.push_back(2);
+		answer.push_back(2);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(2);
+	}
+	else if (getArgument(_cube.getColorDetails(2, 2, 1), GREEN, ORANGE))
+	{
+		if (_cube.getColorDetails(2, 2, 1)[3] != GREEN && _cube.getColorDetails(2, 2, 1)[5] != ORANGE)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(0, 0, 1), GREEN, ORANGE))
+	{
+		answer.push_back(1);
+		answer.push_back(4);
+		answer.push_back(4);
+		answer.push_back(4);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(4);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(2);
+		answer.push_back(1);
+		answer.push_back(2);
+		answer.push_back(2);
+		answer.push_back(2);
+	}
+
+	for (int i = 0; i < answer.size(); i++)
+	{
+		if (answer[i] == 2 || answer[i] == 3)
+			_cube.rotationData(answer[i], 1);
+		else
+			_cube.rotationData(answer[i], -1);
+		returnAnswer.push_back(answer[i]);
+	}
+
+	if (_cube.getColorDetails(2, 2, 1)[3] != GREEN && _cube.getColorDetails(2, 2, 1)[5] != ORANGE)
+		layer_2_step_2(returnAnswer);
+}
+
+void Machine::layer_2_step_3(std::vector<int>& returnAnswer)
+{
+	std::vector<int> answer;
+
+	if (getArgument(_cube.getColorDetails(0, 1, 2), BLUE, PINK))
+	{
+		if (_cube.getColorDetails(0, 1, 2)[0] == BLUE && _cube.getColorDetails(0, 1, 2)[4] == PINK)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+		}
+		else if (_cube.getColorDetails(0, 1, 2)[0] == PINK && _cube.getColorDetails(0, 1, 2)[4] == BLUE)
+		{
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(1, 2, 2), BLUE, PINK))
+	{
+		if (_cube.getColorDetails(1, 2, 2)[0] == BLUE && _cube.getColorDetails(1, 2, 2)[3] == PINK)
+		{
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+		}
+		if (_cube.getColorDetails(1, 2, 2)[0] == PINK && _cube.getColorDetails(1, 2, 2)[3] == BLUE)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(1, 0, 2), BLUE, PINK))
+	{
+		if (_cube.getColorDetails(1, 0, 2)[0] == BLUE && _cube.getColorDetails(1, 0, 2)[2] == PINK)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+		}
+		else if (_cube.getColorDetails(1, 0, 2)[0] == PINK && _cube.getColorDetails(1, 0, 2)[2] == BLUE)
+		{
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(2, 1, 2), BLUE, PINK))
+	{
+		if (_cube.getColorDetails(2, 1, 2)[0] == PINK && _cube.getColorDetails(2, 1, 2)[5] == BLUE)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+		}
+		else if (_cube.getColorDetails(2, 1, 2)[0] == BLUE && _cube.getColorDetails(2, 1, 2)[5] == PINK)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(2, 0, 1), BLUE, PINK))
+	{
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(1);
+		answer.push_back(5);
+		answer.push_back(1);
+		answer.push_back(2);
+		answer.push_back(2);
+		answer.push_back(2);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(2);
+
+	}
+	else if (getArgument(_cube.getColorDetails(0, 0, 1), BLUE, PINK))
+	{
+		if (_cube.getColorDetails(0, 0, 1)[2] != BLUE && _cube.getColorDetails(0, 0, 1)[4] != PINK)
+		{
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+		}
+	}
+
+	for (int i = 0; i < answer.size(); i++)
+	{
+		if (answer[i] == 2 || answer[i] == 3)
+			_cube.rotationData(answer[i], 1);
+		else
+			_cube.rotationData(answer[i], -1);
+		returnAnswer.push_back(answer[i]);
+	}
+
+	if (_cube.getColorDetails(0, 0, 1)[2] != BLUE && _cube.getColorDetails(0, 0, 1)[4] != PINK)
+		layer_2_step_3(returnAnswer);
+}
+
+void Machine::layer_2_step_4(std::vector<int>& returnAnswer)
+{
+	std::vector<int> answer;
+
+	if (getArgument(_cube.getColorDetails(0, 1, 2), BLUE, ORANGE))
+	{
+		if (_cube.getColorDetails(0, 1, 2)[0] == BLUE && _cube.getColorDetails(0, 1, 2)[4] == ORANGE)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(5);
+		}
+		else if (_cube.getColorDetails(0, 1, 2)[0] == ORANGE && _cube.getColorDetails(0, 1, 2)[4] == BLUE)
+		{
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(1, 2, 2), BLUE, ORANGE))
+	{
+		if (_cube.getColorDetails(1, 2, 2)[0] == BLUE && _cube.getColorDetails(1, 2, 2)[3] == ORANGE)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(5);
+		}
+		else if (_cube.getColorDetails(1, 2, 2)[0] == ORANGE && _cube.getColorDetails(1, 2, 2)[3] == BLUE)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(1, 0, 2), BLUE, ORANGE))
+	{
+		if (_cube.getColorDetails(1, 0, 2)[0] == BLUE && _cube.getColorDetails(1, 0, 2)[2] == ORANGE)
+		{
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(5);
+		}
+		else if (_cube.getColorDetails(1, 0, 2)[0] == ORANGE && _cube.getColorDetails(1, 0, 2)[2] == BLUE)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(2, 1, 2), BLUE, ORANGE))
+	{
+		if (_cube.getColorDetails(2, 1, 2)[0] == BLUE && _cube.getColorDetails(2, 1, 2)[5] == ORANGE)
+		{
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(5);
+		}
+		else if (_cube.getColorDetails(2, 1, 2)[0] == ORANGE && _cube.getColorDetails(2, 1, 2)[5] == BLUE)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			//
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(2, 0, 1), BLUE, ORANGE))
+	{
+		if (_cube.getColorDetails(2, 0, 1)[2] != BLUE && _cube.getColorDetails(2, 0, 1)[5] != ORANGE)
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+		}
+	}
+
+	for (int i = 0; i < answer.size(); i++)
+	{
+		if (answer[i] == 2 || answer[i] == 3)
+			_cube.rotationData(answer[i], 1);
+		else
+			_cube.rotationData(answer[i], -1);
+		returnAnswer.push_back(answer[i]);
+	}
+
+	if (_cube.getColorDetails(2, 0, 1)[2] != BLUE && _cube.getColorDetails(2, 0, 1)[5] != ORANGE)
+		layer_2_step_4(returnAnswer);
+}
+
 std::vector<int> Machine::getAction()
 {
 	std::vector<int> answer;
@@ -1108,6 +2110,11 @@ std::vector<int> Machine::getAction()
 	layer_1_step_2(answer);
 	layer_1_step_3(answer);
 	layer_1_step_4(answer);
+
+	layer_2_step_1(answer);
+	layer_2_step_2(answer);
+	layer_2_step_3(answer);
+	layer_2_step_4(answer);
 
 	std::cout << "Size: " << answer.size() << std::endl;
 
