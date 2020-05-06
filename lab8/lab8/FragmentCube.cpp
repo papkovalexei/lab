@@ -16,7 +16,13 @@ unsigned char* FragmentCube::getColor(int i)
 	return _color_byte;
 }
 
-void FragmentCube::setColor(int i, int color)
+void FragmentCube::setColorFragment(unsigned int* color_position)
+{
+	for (int i = 0; i < 6; i++)
+		_color[i] = color_position[i];
+}
+
+void FragmentCube::setColor(int i, unsigned int color)
 {
 	_color[i] = color;
 }

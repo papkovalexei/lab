@@ -1,11 +1,11 @@
 #include <time.h>
 #include <stdlib.h>
 #include <iostream>
+#include <fstream>
 
 #include "RubikCube.h"
 #include "Machine.h"
 #include "Color.h"
-
 
 #define SIZE 100
 int TIME = 4;
@@ -14,8 +14,6 @@ const int width = 600;
 const int height = 600;
 const int depth = 300;
 
-int _step = 0;
-
 float xrot = 0;
 float yrot = 0;
 float xdiff = 0;
@@ -23,12 +21,12 @@ float ydiff = 0;
 
 bool mouseDown = false;
 
+unsigned int color_brik[9] = { WHITE, YELLOW, BLUE, GREEN, PINK, ORANGE };
+
 int timerOn = 0;
 int automat = 0;
 
-unsigned int color_brik[9] = { WHITE, YELLOW, BLUE, GREEN, PINK, ORANGE };
-
-RubikCube cube{ SIZE, color_brik };
+RubikCube cube;
 
 void display()
 {
@@ -71,7 +69,6 @@ void keyboard(unsigned char key, int, int)
 	}
 	else if (key == 'r')
 	{
-		_step = 0;
 		Machine machine(cube);
 
 		std::vector<int> rotate = machine.getAction();
@@ -80,12 +77,15 @@ void keyboard(unsigned char key, int, int)
 			cube.pushMove(rotate[i]);
 		automat = 1 - automat;
 	}
-	else if (key == 'c')
+	else if (key == 's')
 	{
-		for (int i = 0; i < 6; i++)
-		{
-			std::cout << cube._details[2][0][1].getColorFragment()[i] << std::endl;
-		}
+		std::ofstream output_file("output.txt");
+
+		for (int i = 0; i < 3; i++)
+			for (int j = 0; j < 3; j++)
+				for (int k = 0; k < 3; k++)
+					for (int c = 0; c < 6; c++)
+						output_file << cube.getColorDetails(i, j, k)[c] << std::endl;
 	}
 }
 
@@ -146,7 +146,7 @@ void mouse(int button, int state, int x, int y)
 		
 }
 
-void initCube(int argc, char** argv)
+void graphics(int argc, char** argv)
 {
 	glutInit(&argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
@@ -158,4 +158,16 @@ void initCube(int argc, char** argv)
 	glutKeyboardFunc(keyboard);
 	glutMotionFunc(mouseMotion);
 	glutMouseFunc(mouse);
+}
+
+void initCube(int argc, char** argv)
+{
+	cube.init(SIZE, color_brik);
+	graphics(argc, argv);
+}
+
+void initCube(int argc, char** argv, unsigned int* color_position)
+{
+	cube.init(SIZE, color_brik, color_position);
+	graphics(argc, argv);
 }

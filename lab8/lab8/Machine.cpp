@@ -1,21 +1,6 @@
 #include "Machine.h"
 
 Machine::Machine(RubikCube cube) : _cube(cube) {}
- 
-/*
-	[0][1][2] - white/pink
-	[1][2][2] - white/green
-	[1][0][2] - white/blue
-	[2][1][2] - white/orange
-	[2][1][0] - orange/yellow
-	[2][0][1] - orange/blue
-	[2][2][1] - orange/green
-	[1][0][0] - yellow/blue
-	[0][1][0] - yellow/pink
-	[1][2][0] - yellow/green
-	[0][2][1] - pink/green
-	[0][0][1] - pink/blue
-*/
 
 bool getArgument(int* color, int first, int second)
 {

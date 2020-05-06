@@ -11,8 +11,9 @@ public:
 	void draw(float x, float y, float z);
 
 	int* getColorFragment();
+	void setColorFragment(unsigned int* color_position);
 
-	void setColor(int i, int color);
+	void setColor(int i, unsigned int color);
 	void setSize(float size);
 
 	void rotateX();
@@ -20,7 +21,6 @@ public:
 	void rotateZ();
 private:
 	unsigned char* getColor(int i);
-
 	void drawCube();
 
 	float _size;

@@ -37,49 +37,29 @@ void RubikCube::pushMove(int brink)
 	_queueMove.push(brink);
 }
 
-RubikCube::RubikCube(float size, unsigned int* color) : _size(size)
-{
-	_brink_animation = -1;
-
-	for (int i = 0; i < 6; i++)
-		_brink_rotate[i] = 0;
-
-	for (int i = 0; i < 6; i++)
-		_color[i] = color[i];
-
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
-			_details[i][j][2].setColor(0, _color[0]);
-
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
-			_details[i][j][0].setColor(1, _color[1]);
-
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
-			_details[j][0][i].setColor(2, _color[2]);
-
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
-			_details[j][2][i].setColor(3, _color[3]);
-
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
-			_details[0][j][i].setColor(4, _color[4]);
-
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
-			_details[2][j][i].setColor(5, _color[5]);
-
-	for (int i = 0; i < 3; i++)
-		for (int j = 0; j < 3; j++)
-			for (int k = 0; k < 3; k++)
-				_details[i][j][k].setSize((_size / 3.0) * 0.95);
-}
+RubikCube::RubikCube() {}
 
 int RubikCube::getBrinkAnimation()
 {
 	return _brink_animation;
+}
+
+int* RubikCube::getColorDetails(int i, int j, int k)
+{
+	return _details[i][j][k].getColorFragment();
+}
+
+void RubikCube::operator=(const RubikCube copy_cube)
+{
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			for (int k = 0; k < 3; k++)
+			{
+				this->_details[i][j][k] = copy_cube._details[i][j][k];
+			}
+
+	for (int i = 0; i < 6; i++)
+		this->_color[i] = copy_cube._color[i];
 }
 
 void RubikCube::rotationData(int brink, int vec)
@@ -225,7 +205,77 @@ bool RubikCube::emptyQueue()
 	return _queueMove.empty();
 }
 
-int* RubikCube::getColorDetails(int i, int j, int k)
+void RubikCube::init(float size, unsigned int* color, unsigned int* position_color)
 {
-	return _details[i][j][k].getColorFragment();
+	_brink_animation = -1;
+
+	for (int i = 0; i < 6; i++)
+		_brink_rotate[i] = 0;
+
+	for (int i = 0; i < 6; i++)
+		_color[i] = color[i];
+
+	_size = size;
+	int position = 0;
+
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			for (int k = 0; k < 3; k++)
+			{
+				unsigned int buffer_color[6];
+
+				for (int c = 0; c < 6; c++)
+				{
+					buffer_color[c] = position_color[position];
+					position++;
+				}
+
+				_details[i][j][k].setColorFragment(buffer_color);
+			}
+
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			for (int k = 0; k < 3; k++)
+				_details[i][j][k].setSize((_size / 3.0) * 0.95);
+}
+
+void RubikCube::init(float size, unsigned int* color)
+{
+	_size = size;
+	_brink_animation = -1;
+
+	for (int i = 0; i < 6; i++)
+		_brink_rotate[i] = 0;
+
+	for (int i = 0; i < 6; i++)
+		_color[i] = color[i];
+
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			_details[i][j][2].setColor(0, _color[0]);
+
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			_details[i][j][0].setColor(1, _color[1]);
+
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			_details[j][0][i].setColor(2, _color[2]);
+
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			_details[j][2][i].setColor(3, _color[3]);
+
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			_details[0][j][i].setColor(4, _color[4]);
+
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			_details[2][j][i].setColor(5, _color[5]);
+
+	for (int i = 0; i < 3; i++)
+		for (int j = 0; j < 3; j++)
+			for (int k = 0; k < 3; k++)
+				_details[i][j][k].setSize((_size / 3.0) * 0.95);
 }
