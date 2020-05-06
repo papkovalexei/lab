@@ -2465,6 +2465,247 @@ void Machine::cross_last_step_2(std::vector<int>& returnAnswer)
 		cross_last_step_2(returnAnswer);
 }
 
+void Machine::layer_3_step_1(std::vector<int>& returnAnswer)
+{
+	std::vector<int> answer;
+
+	while (!getArgument(_cube.getColorDetails(0, 0, 2), WHITE, PINK, BLUE)
+		&& !getArgument(_cube.getColorDetails(2, 0, 2), WHITE, ORANGE, BLUE)
+		&& !getArgument(_cube.getColorDetails(0, 2, 2), WHITE, PINK, GREEN)
+		&& !getArgument(_cube.getColorDetails(2, 2, 2), WHITE, ORANGE, GREEN))
+	{
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(5);
+		answer.push_back(1);
+		answer.push_back(4);
+		answer.push_back(4);
+		answer.push_back(4);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(1);
+		answer.push_back(5);
+		answer.push_back(1);
+		answer.push_back(4);
+
+		for (int j = 0; j < answer.size(); j++)
+		{
+			if (answer[j] == 2 || answer[j] == 3)
+				_cube.rotationData(answer[j], 1);
+			else
+				_cube.rotationData(answer[j], -1);
+			returnAnswer.push_back(answer[j]);
+		}
+		answer.clear();
+	}
+
+	if (getArgument(_cube.getColorDetails(0, 0, 2), WHITE, PINK, BLUE))
+	{
+		while (!getArgument(_cube.getColorDetails(0, 0, 2), WHITE, PINK, BLUE)
+			|| !getArgument(_cube.getColorDetails(2, 0, 2), WHITE, ORANGE, BLUE)
+			|| !getArgument(_cube.getColorDetails(0, 2, 2), WHITE, PINK, GREEN)
+			|| !getArgument(_cube.getColorDetails(2, 2, 2), WHITE, ORANGE, GREEN))
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+
+			for (int j = 0; j < answer.size(); j++)
+			{
+				if (answer[j] == 2 || answer[j] == 3)
+					_cube.rotationData(answer[j], 1);
+				else
+					_cube.rotationData(answer[j], -1);
+				returnAnswer.push_back(answer[j]);
+			}
+			answer.clear();
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(2, 0, 2), WHITE, ORANGE, BLUE))
+	{
+		while (!getArgument(_cube.getColorDetails(0, 0, 2), WHITE, PINK, BLUE)
+			|| !getArgument(_cube.getColorDetails(2, 0, 2), WHITE, ORANGE, BLUE)
+			|| !getArgument(_cube.getColorDetails(0, 2, 2), WHITE, PINK, GREEN)
+			|| !getArgument(_cube.getColorDetails(2, 2, 2), WHITE, ORANGE, GREEN))
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(4);
+
+			for (int j = 0; j < answer.size(); j++)
+			{
+				if (answer[j] == 2 || answer[j] == 3)
+					_cube.rotationData(answer[j], 1);
+				else
+					_cube.rotationData(answer[j], -1);
+				returnAnswer.push_back(answer[j]);
+			}
+			answer.clear();
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(0, 2, 2), WHITE, PINK, GREEN))
+	{
+		while (!getArgument(_cube.getColorDetails(0, 0, 2), WHITE, PINK, BLUE)
+			|| !getArgument(_cube.getColorDetails(2, 0, 2), WHITE, ORANGE, BLUE)
+			|| !getArgument(_cube.getColorDetails(0, 2, 2), WHITE, PINK, GREEN)
+			|| !getArgument(_cube.getColorDetails(2, 2, 2), WHITE, ORANGE, GREEN))
+		{
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(4);
+			answer.push_back(1);
+			answer.push_back(5);
+			answer.push_back(5);
+			answer.push_back(5);
+
+			for (int j = 0; j < answer.size(); j++)
+			{
+				if (answer[j] == 2 || answer[j] == 3)
+					_cube.rotationData(answer[j], 1);
+				else
+					_cube.rotationData(answer[j], -1);
+				returnAnswer.push_back(answer[j]);
+			}
+			answer.clear();
+		}
+	}
+	else if (getArgument(_cube.getColorDetails(2, 2, 2), WHITE, ORANGE, GREEN))
+	{
+		while (!getArgument(_cube.getColorDetails(0, 0, 2), WHITE, PINK, BLUE)
+			|| !getArgument(_cube.getColorDetails(2, 0, 2), WHITE, ORANGE, BLUE)
+			|| !getArgument(_cube.getColorDetails(0, 2, 2), WHITE, PINK, GREEN)
+			|| !getArgument(_cube.getColorDetails(2, 2, 2), WHITE, ORANGE, GREEN))
+		{
+
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(2);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(1);
+			answer.push_back(3);
+			answer.push_back(1);
+			answer.push_back(2);
+
+			for (int j = 0; j < answer.size(); j++)
+			{
+				if (answer[j] == 2 || answer[j] == 3)
+					_cube.rotationData(answer[j], 1);
+				else
+					_cube.rotationData(answer[j], -1);
+				returnAnswer.push_back(answer[j]);
+			}
+			answer.clear();
+		}
+	}
+}
+
+void Machine::layer_3_step_2(std::vector<int>& returnAnswer)
+{
+	std::vector<int> answer;
+
+	for (int i = 0; i < 4; i++)
+	{
+		if (_cube.getColorDetails(0, 0, 2)[0] != WHITE)
+		{
+			while (_cube.getColorDetails(0, 0, 2)[0] != WHITE)
+			{
+				answer.push_back(2);
+				answer.push_back(2);
+				answer.push_back(2);
+				answer.push_back(0);
+				answer.push_back(0);
+				answer.push_back(0);
+				answer.push_back(2);
+				answer.push_back(0);
+				answer.push_back(2);
+				answer.push_back(2);
+				answer.push_back(2);
+				answer.push_back(0);
+				answer.push_back(0);
+				answer.push_back(0);
+				answer.push_back(2);
+				answer.push_back(0);
+
+				for (int j = 0; j < answer.size(); j++)
+				{
+					if (answer[j] == 2 || answer[j] == 3)
+						_cube.rotationData(answer[j], 1);
+					else
+						_cube.rotationData(answer[j], -1);
+					returnAnswer.push_back(answer[j]);
+				}
+				answer.clear();
+			}
+		}
+		_cube.rotationData(1, -1);
+		returnAnswer.push_back(1);
+	}
+
+	for (int j = 0; j < answer.size(); j++)
+	{
+		if (answer[j] == 2 || answer[j] == 3)
+			_cube.rotationData(answer[j], 1);
+		else
+			_cube.rotationData(answer[j], -1);
+		returnAnswer.push_back(answer[j]);
+	}
+}
+
+void Machine::layer_3_step_3(std::vector<int>& returnAnswer)
+{
+	while (_cube.getColorDetails(1, 2, 2)[3] != GREEN)
+	{
+		returnAnswer.push_back(1);
+		_cube.rotationData(1, -1);
+	}
+}
+
 std::vector<int> Machine::getAction()
 {
 	std::vector<int> answer;
@@ -2486,6 +2727,10 @@ std::vector<int> Machine::getAction()
 
 	cross_last_step_1(answer);
 	cross_last_step_2(answer);
+
+	layer_3_step_1(answer);
+	layer_3_step_2(answer);
+	layer_3_step_3(answer);
 
 	std::cout << "Size: " << answer.size() << std::endl;
 

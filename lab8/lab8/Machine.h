@@ -38,6 +38,10 @@ private:
 	void cross_last_step_1(std::vector<int>& answer);
 	void cross_last_step_2(std::vector<int>& answer);
 
+	void layer_3_step_1(std::vector<int>& answer);
+	void layer_3_step_2(std::vector<int>& answer);
+	void layer_3_step_3(std::vector<int>& answer);
+
 	RubikCube _cube;
 };
 
