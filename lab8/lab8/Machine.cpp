@@ -1,5 +1,7 @@
 #include "Machine.h"
 
+#define DEPTH 40
+
 Machine::Machine(RubikCube cube) : _cube(cube) {}
 
 bool getArgument(int* color, int first, int second)
@@ -152,6 +154,13 @@ void Machine::cross_step_1(std::vector<int>& answer)
 			_cube.rotationData(buffer[i], -1);
 		answer.push_back(buffer[i]);
 	}
+
+	if ((_cube.getColorDetails(0, 1, 0)[1] != YELLOW
+		&& _cube.getColorDetails(0, 1, 0)[4] != PINK))
+	{
+		answer.clear();
+		answer.push_back(-1);
+	}
 }
 
 void Machine::cross_step_2(std::vector<int>& returnAnswer)
@@ -275,6 +284,13 @@ void Machine::cross_step_2(std::vector<int>& returnAnswer)
 			returnAnswer.push_back(answer[i]);
 		}
 	}
+
+	if ((_cube.getColorDetails(1, 2, 0)[1] != YELLOW
+		&& _cube.getColorDetails(1, 2, 0)[3] != GREEN))
+	{
+		returnAnswer.clear();
+		returnAnswer.push_back(-1);
+	}
 }
 
 void Machine::cross_step_3(std::vector<int>& returnAnswer)
@@ -390,6 +406,13 @@ void Machine::cross_step_3(std::vector<int>& returnAnswer)
 				_cube.rotationData(buffer[i], -1);
 		}
 	}
+
+	if ((_cube.getColorDetails(2, 1, 0)[1] != YELLOW
+		&& _cube.getColorDetails(2, 1, 0)[5] != ORANGE))
+	{
+		returnAnswer.clear();
+		returnAnswer.push_back(-1);
+	}
 }
 
 void Machine::cross_step_4(std::vector<int>& returnAnswer)
@@ -499,6 +522,13 @@ void Machine::cross_step_4(std::vector<int>& returnAnswer)
 			else
 				_cube.rotationData(buffer[i], -1);
 		}
+	}
+
+	if ((_cube.getColorDetails(1, 0, 0)[1] != YELLOW
+		&& _cube.getColorDetails(1, 0, 0)[2] != BLUE))
+	{
+		returnAnswer.clear();
+		returnAnswer.push_back(-1);
 	}
 }
 
@@ -640,8 +670,19 @@ void Machine::layer_1_step_1(std::vector<int>& returnAnswer)
 		returnAnswer.push_back(answer[i]);
 	}
 
+	int incorrect = 0;
+
 	while (_cube.getColorDetails(0, 2, 0)[1] != YELLOW && _cube.getColorDetails(0, 2, 0)[3] != GREEN && _cube.getColorDetails(0, 2, 0)[5] != PINK)
 	{
+		incorrect++;
+
+		if (incorrect == DEPTH)
+		{
+			returnAnswer.clear();
+			returnAnswer.push_back(-1);
+			break;
+		}
+
 		answer.clear();
 
 		answer.push_back(3);
@@ -793,8 +834,19 @@ void Machine::layer_1_step_2(std::vector<int>& returnAnswer)
 		returnAnswer.push_back(answer[i]);
 	}
 
+	int incorrect = 0;
+
 	while (_cube.getColorDetails(0, 0, 0)[1] != YELLOW && _cube.getColorDetails(0, 0, 0)[2] != BLUE && _cube.getColorDetails(0, 0, 0)[4] != PINK)
 	{
+		incorrect++;
+
+		if (incorrect == DEPTH)
+		{
+			returnAnswer.clear();
+			returnAnswer.push_back(-1);
+			break;
+		}
+
 		answer.clear();
 
 		answer.push_back(4);
@@ -930,8 +982,19 @@ void Machine::layer_1_step_3(std::vector<int>& returnAnswer)
 		returnAnswer.push_back(answer[i]);
 	}
 
+	int incorrect = 0;
+
 	while (_cube.getColorDetails(2, 0, 0)[1] != YELLOW && _cube.getColorDetails(2, 0, 0)[2] != BLUE && _cube.getColorDetails(2, 0, 0)[5] != ORANGE)
 	{
+		incorrect++;
+
+		if (incorrect == DEPTH)
+		{
+			returnAnswer.clear();
+			returnAnswer.push_back(-1);
+			break;
+		}
+
 		answer.clear();
 
 		answer.push_back(2);
@@ -1048,8 +1111,19 @@ void Machine::layer_1_step_4(std::vector<int>& returnAnswer)
 		returnAnswer.push_back(answer[i]);
 	}
 
+	int incorrect = 0;
+
 	while (_cube.getColorDetails(2, 2, 0)[1] != YELLOW && _cube.getColorDetails(2, 2, 0)[3] != GREEN && _cube.getColorDetails(2, 2, 0)[5] != ORANGE)
 	{
+		incorrect++;
+
+		if (incorrect == DEPTH)
+		{
+			returnAnswer.clear();
+			returnAnswer.push_back(-1);
+			break;
+		}
+
 		answer.clear();
 
 		answer.push_back(5);
@@ -1082,6 +1156,16 @@ void Machine::layer_1_step_4(std::vector<int>& returnAnswer)
 
 void Machine::layer_2_step_1(std::vector<int>& returnAnswer)
 {
+	static int incorrect = 0;
+	incorrect++;
+
+	if (incorrect >= DEPTH)
+	{
+		returnAnswer.clear();
+		returnAnswer.push_back(-1);
+		return;
+	}
+
 	std::vector<int> answer;
 
 	if (getArgument(_cube.getColorDetails(0, 1, 2), GREEN, PINK))
@@ -1360,6 +1444,16 @@ void Machine::layer_2_step_1(std::vector<int>& returnAnswer)
 
 void Machine::layer_2_step_2(std::vector<int>& returnAnswer)
 {
+	static int incorrect = 0;
+	incorrect++;
+
+	if (incorrect >= DEPTH)
+	{
+		returnAnswer.clear();
+		returnAnswer.push_back(-1);
+		return;
+	}
+
 	std::vector<int> answer;
 
 	if (getArgument(_cube.getColorDetails(0, 1, 2), GREEN, ORANGE))
@@ -1622,6 +1716,16 @@ void Machine::layer_2_step_2(std::vector<int>& returnAnswer)
 
 void Machine::layer_2_step_3(std::vector<int>& returnAnswer)
 {
+	static int incorrect = 0;
+	incorrect++;
+
+	if (incorrect >= DEPTH)
+	{
+		returnAnswer.clear();
+		returnAnswer.push_back(-1);
+		return;
+	}
+
 	std::vector<int> answer;
 
 	if (getArgument(_cube.getColorDetails(0, 1, 2), BLUE, PINK))
@@ -1866,6 +1970,16 @@ void Machine::layer_2_step_3(std::vector<int>& returnAnswer)
 
 void Machine::layer_2_step_4(std::vector<int>& returnAnswer)
 {
+	static int incorrect = 0;
+	incorrect++;
+
+	if (incorrect >= DEPTH)
+	{
+		returnAnswer.clear();
+		returnAnswer.push_back(-1);
+		return;
+	}
+
 	std::vector<int> answer;
 
 	if (getArgument(_cube.getColorDetails(0, 1, 2), BLUE, ORANGE))
@@ -2220,6 +2334,16 @@ void Machine::cross_last_step_1(std::vector<int>& returnAnswer)
 
 void Machine::cross_last_step_2(std::vector<int>& returnAnswer)
 {
+	static int incorrect = 0;
+	incorrect++;
+
+	if (incorrect >= DEPTH)
+	{
+		returnAnswer.clear();
+		returnAnswer.push_back(-1);
+		return;
+	}
+
 	std::vector<int> answer;
 
 	int color[4] = { _cube.getColorDetails(1, 2, 2)[3] , _cube.getColorDetails(2, 1, 2)[5], _cube.getColorDetails(1, 0, 2)[2], _cube.getColorDetails(0, 1, 2)[4] };
@@ -2454,11 +2578,22 @@ void Machine::layer_3_step_1(std::vector<int>& returnAnswer)
 {
 	std::vector<int> answer;
 
+	int incorrect = 0;
+
 	while (!getArgument(_cube.getColorDetails(0, 0, 2), WHITE, PINK, BLUE)
 		&& !getArgument(_cube.getColorDetails(2, 0, 2), WHITE, ORANGE, BLUE)
 		&& !getArgument(_cube.getColorDetails(0, 2, 2), WHITE, PINK, GREEN)
 		&& !getArgument(_cube.getColorDetails(2, 2, 2), WHITE, ORANGE, GREEN))
 	{
+		incorrect++;
+
+		if (incorrect == DEPTH)
+		{
+			returnAnswer.clear();
+			returnAnswer.push_back(-1);
+			return;
+		}
+
 		answer.push_back(1);
 		answer.push_back(1);
 		answer.push_back(1);
@@ -2487,6 +2622,8 @@ void Machine::layer_3_step_1(std::vector<int>& returnAnswer)
 		answer.clear();
 	}
 
+	incorrect = 0;
+
 	if (getArgument(_cube.getColorDetails(0, 0, 2), WHITE, PINK, BLUE))
 	{
 		while (!getArgument(_cube.getColorDetails(0, 0, 2), WHITE, PINK, BLUE)
@@ -2494,6 +2631,15 @@ void Machine::layer_3_step_1(std::vector<int>& returnAnswer)
 			|| !getArgument(_cube.getColorDetails(0, 2, 2), WHITE, PINK, GREEN)
 			|| !getArgument(_cube.getColorDetails(2, 2, 2), WHITE, ORANGE, GREEN))
 		{
+			incorrect++;
+
+			if (incorrect == DEPTH)
+			{
+				returnAnswer.clear();
+				returnAnswer.push_back(-1);
+				return;
+			}
+
 			answer.push_back(1);
 			answer.push_back(1);
 			answer.push_back(1);
@@ -2529,6 +2675,15 @@ void Machine::layer_3_step_1(std::vector<int>& returnAnswer)
 			|| !getArgument(_cube.getColorDetails(0, 2, 2), WHITE, PINK, GREEN)
 			|| !getArgument(_cube.getColorDetails(2, 2, 2), WHITE, ORANGE, GREEN))
 		{
+
+			incorrect++;
+
+			if (incorrect == DEPTH)
+			{
+				returnAnswer.clear();
+				returnAnswer.push_back(-1);
+				return;
+			}
 			answer.push_back(1);
 			answer.push_back(1);
 			answer.push_back(1);
@@ -2564,6 +2719,15 @@ void Machine::layer_3_step_1(std::vector<int>& returnAnswer)
 			|| !getArgument(_cube.getColorDetails(0, 2, 2), WHITE, PINK, GREEN)
 			|| !getArgument(_cube.getColorDetails(2, 2, 2), WHITE, ORANGE, GREEN))
 		{
+			incorrect++;
+
+			if (incorrect == DEPTH)
+			{
+				returnAnswer.clear();
+				returnAnswer.push_back(-1);
+				return;
+			}
+
 			answer.push_back(1);
 			answer.push_back(1);
 			answer.push_back(1);
@@ -2599,7 +2763,14 @@ void Machine::layer_3_step_1(std::vector<int>& returnAnswer)
 			|| !getArgument(_cube.getColorDetails(0, 2, 2), WHITE, PINK, GREEN)
 			|| !getArgument(_cube.getColorDetails(2, 2, 2), WHITE, ORANGE, GREEN))
 		{
+			incorrect++;
 
+			if (incorrect == DEPTH)
+			{
+				returnAnswer.clear();
+				returnAnswer.push_back(-1);
+				return;
+			}
 			answer.push_back(1);
 			answer.push_back(1);
 			answer.push_back(1);
@@ -2634,12 +2805,23 @@ void Machine::layer_3_step_2(std::vector<int>& returnAnswer)
 {
 	std::vector<int> answer;
 
+	int incorrect = 0;
+
 	for (int i = 0; i < 4; i++)
 	{
 		if (_cube.getColorDetails(0, 0, 2)[0] != WHITE)
 		{
 			while (_cube.getColorDetails(0, 0, 2)[0] != WHITE)
 			{
+				incorrect++;
+
+				if (incorrect == DEPTH)
+				{
+					returnAnswer.clear();
+					returnAnswer.push_back(-1);
+					return;
+				}
+
 				answer.push_back(2);
 				answer.push_back(2);
 				answer.push_back(2);
@@ -2684,8 +2866,19 @@ void Machine::layer_3_step_2(std::vector<int>& returnAnswer)
 
 void Machine::layer_3_step_3(std::vector<int>& returnAnswer)
 {
+	int incorrect = 0;
+
 	while (_cube.getColorDetails(1, 2, 2)[3] != GREEN)
 	{
+		if (incorrect == DEPTH)
+		{
+			returnAnswer.clear();
+			returnAnswer.push_back(-1);
+			return;
+		}
+
+		incorrect;
+
 		returnAnswer.push_back(1);
 		_cube.rotationData(1, -1);
 	}
@@ -2696,26 +2889,117 @@ std::vector<int> Machine::getAction()
 	std::vector<int> answer;
 
 	cross_step_1(answer);
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	cross_step_2(answer);
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	cross_step_3(answer);
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	cross_step_4(answer);
 
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	layer_1_step_1(answer);
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	layer_1_step_2(answer);
+
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	layer_1_step_3(answer);
+
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	layer_1_step_4(answer);
 
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	layer_2_step_1(answer);
+
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	layer_2_step_2(answer);
+
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	layer_2_step_3(answer);
+
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	layer_2_step_4(answer);
 
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	cross_last_step_1(answer);
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	cross_last_step_2(answer);
 
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	layer_3_step_1(answer);
+
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	layer_3_step_2(answer);
+
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
+
 	layer_3_step_3(answer);
+
+
+	if (answer.size() == 1)
+		if (answer[0] == -1)
+			return answer;
 
 	std::cout << "Size: " << answer.size() << std::endl;
 
