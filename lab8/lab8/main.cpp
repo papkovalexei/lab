@@ -8,7 +8,7 @@ using namespace std;
 
 int main(int argc, char** argv)
 {
-	if (argc > 2)
+	if (argc > 1)
 	{
 		ifstream input_file(argv[1]);
 		bool ok = true;
